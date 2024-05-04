@@ -18,8 +18,8 @@
                     <p>Foco</p>
                     <div id="foco">
                         <button>-</button>
-                        <input type="number">
-                        <button>+</button>
+                        <input type="number" id="minutos-foco" value="0">
+                        <button id="btnAumentar">+</button>
                     </div>
                 </div>
                 <div class="set-menu">
@@ -41,7 +41,7 @@
             </div>
             <div class="box" id="start-stop">
                 <p id="comecar">
-                    <button>Começar</button>
+                    <button id="btnComecar">Começar</button>
                 </p>
                 <p id="reiniciar">
                     <button>Reiniciar</button>
@@ -49,17 +49,23 @@
             </div>
         </div>
         <div class="card" id="clock">
-            <div class="box" id="titulo">
+            <div class="box titulo-foco" id="titulo">
                 <p>Foco 🍅</p>
             </div>
-            <div class="box" id="circulo">
-                <svg>
-                    <circle r="50" cx="75" cy="75"></circle>
-                    <circle r="50" cx="75" cy="75"></circle>
-                </svg>
+            <div class="box" id="circulo-status">
+                <div id="circulo-progresso">
+                    <div id="circulo-fundo">
+                        <div id="box-minutos">
+                            <p id="minutos">
+
+                            </p>
+                            <p id="minutos-restantes">minutos restantes</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="box" id="ciclos">
-                ciclos
+            <div class="box" id="numero-ciclos">
+                ciclos 1/2
             </div>
         </div>
         <div class="card" id="to-do">
