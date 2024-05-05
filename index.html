@@ -12,30 +12,33 @@
         <div class="card">
             <div class="box" id="titulo">
                 <p>Menu 🍅</p>
+                <span id="aviso-preenchimento">
+                    * Preencha todos os campos abaixo
+                </span>
             </div>
             <div class="box" id="time">
                 <div class="set-menu">
                     <p>Foco</p>
                     <div id="foco">
-                        <button>-</button>
-                        <input type="number" id="minutos-foco" value="0">
-                        <button id="btnAumentar">+</button>
+                        <button id="btnDiminuirFoco">-</button>
+                        <input type="number" id="foco-set" value="0">
+                        <button id="btnAumentarFoco">+</button>
                     </div>
                 </div>
                 <div class="set-menu">
                     <p>Intervalo</p>
                     <div id="intervalo">
-                        <button>-</button>
-                        <input type="number">
-                        <button>+</button>
+                        <button id="btnDiminuirIntervalo">-</button>
+                        <input type="number" id="intervalo-set" value="0">
+                        <button id="btnAumentarIntervalo">+</button>
                     </div>
                 </div>
                 <div class="set-menu">
                     <p>Ciclos</p>
                     <div id="ciclos">
-                        <button>-</button>
-                        <input type="number">
-                        <button>+</button>
+                        <button id="btnDiminuirCiclos">-</button>
+                        <input type="number" id="ciclos-set" value="0">
+                        <button id="btnAumentarCiclos">+</button>
                     </div>
                 </div>
             </div>
@@ -56,7 +59,7 @@
                 <div id="circulo-progresso">
                     <div id="circulo-fundo">
                         <div id="box-minutos">
-                            <p id="minutos">
+                            <p id="minutos-circulo">
 
                             </p>
                             <p id="minutos-restantes">minutos restantes</p>
