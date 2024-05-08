@@ -11,6 +11,10 @@ var btnCampoComecar = document.getElementById("comecar")
 var btnAumentarFoco = document.getElementById("btnAumentarFoco")
 var btnDiminuirFoco = document.getElementById("btnDiminuirFoco")
 
+/*Circulo timer */
+var minutosCirculo = document.getElementById("minutos-circulo")
+var numeroCiclos = document.getElementById("numero-ciclos")
+
 btnDiminuirFoco.addEventListener("click", function() {
     if(valorInMinutosFoco <= 0) {
         return
@@ -30,6 +34,8 @@ btnCampoComecar.addEventListener("click", function(){
         return
     } else {
         if (btnComecar.textContent === "Começar") {
+            minutosCirculo.textContent = inMinutosFoco.value
+            numeroCiclos.textContent += " 1/" + inCiclos.value
             avisoPreenchimento.style.color = "transparent";
             btnComecar.textContent = "Pausar";
             btnCampoComecar.setAttribute("id", "active")
