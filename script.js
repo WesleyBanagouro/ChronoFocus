@@ -6,7 +6,7 @@ var valorInMinutosFoco = parseInt(inMinutosFoco.value)
 var avisoPreenchimento = document.getElementById("aviso-preenchimento")
 
 var btnComecar = document.getElementById("btnComecar")
-var campoComecar = document.getElementById("comecar")
+var btnCampoComecar = document.getElementById("comecar")
 
 var btnAumentarFoco = document.getElementById("btnAumentarFoco")
 var btnDiminuirFoco = document.getElementById("btnDiminuirFoco")
@@ -24,7 +24,7 @@ btnAumentarFoco.addEventListener("click", function() {
     return inMinutosFoco.value = valorInMinutosFoco
 })
 
-btnComecar.addEventListener("click", function(){
+btnCampoComecar.addEventListener("click", function(){
     if(inMinutosFoco.value == 0 || inMinutosIntervalo.value == 0 || inCiclos.value == 0) {
         avisoPreenchimento.style.color = 'yellow';
         return
@@ -32,10 +32,10 @@ btnComecar.addEventListener("click", function(){
         if (btnComecar.textContent === "Começar") {
             avisoPreenchimento.style.color = "transparent";
             btnComecar.textContent = "Pausar";
-            campoComecar.style.backgroundColor = "gray";
+            btnCampoComecar.setAttribute("id", "active")
           } else {
             btnComecar.textContent = "Começar";
-            campoComecar.style.backgroundColor = "#FF2E2E"; // Original color for "Começar"
+            btnCampoComecar.setAttribute("id", "comecar")
           }
     }
 })
