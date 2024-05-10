@@ -15,27 +15,31 @@ var btnDiminuirFoco = document.getElementById("btnDiminuirFoco")
 var minutosCirculo = document.getElementById("minutos-circulo")
 var numeroCiclos = document.getElementById("numero-ciclos")
 
-btnDiminuirFoco.addEventListener("click", function() {
+
+function diminuirFoco()  {
     if(valorInMinutosFoco <= 0) {
         return
     }
     valorInMinutosFoco -= 1;
     return inMinutosFoco.value = valorInMinutosFoco
-})
+}
 
-btnAumentarFoco.addEventListener("click", function() {
+btnDiminuirFoco.addEventListener("click", diminuirFoco)
+
+function aumentarFoco() {
     valorInMinutosFoco += 1;
     return inMinutosFoco.value = valorInMinutosFoco
-})
+}
 
-btnCampoComecar.addEventListener("click", function(){
+btnAumentarFoco.addEventListener("click", aumentarFoco)
+
+function start(){
     if(inMinutosFoco.value == 0 || inMinutosIntervalo.value == 0 || inCiclos.value == 0) {
         avisoPreenchimento.style.color = 'yellow';
         return
     } else {
         if (btnComecar.textContent === "Começar") {
-            minutosCirculo.textContent = inMinutosFoco.value
-            numeroCiclos.textContent += " 1/" + inCiclos.value
+            numeroCiclos.textContent = "Ciclos: 1/" + inCiclos.value
             avisoPreenchimento.style.color = "transparent";
             btnComecar.textContent = "Pausar";
             btnCampoComecar.setAttribute("id", "active")
@@ -43,8 +47,13 @@ btnCampoComecar.addEventListener("click", function(){
             btnComecar.textContent = "Começar";
             btnCampoComecar.setAttribute("id", "comecar")
           }
+
     }
-})
+}
+
+
+
+btnCampoComecar.addEventListener("click", start)
 
 
 
@@ -56,18 +65,21 @@ var valorInMinutosIntervalo = parseInt(inMinutosIntervalo.value)
 var btnAumentarFoco = document.getElementById("btnAumentarIntervalo")
 var btnDiminuirFoco = document.getElementById("btnDiminuirIntervalo")
 
-btnDiminuirIntervalo.addEventListener("click", function() {
+function diminuirIntervalo() {
     if(valorInMinutosIntervalo <= 0) {
         return
     }
     valorInMinutosIntervalo -= 1;
     return inMinutosIntervalo.value = valorInMinutosIntervalo
-})
+}
 
-btnAumentarIntervalo.addEventListener("click", function() {
+btnDiminuirIntervalo.addEventListener("click", diminuirIntervalo)
+
+function aumentarIntervalo() {
     valorInMinutosIntervalo += 1;
     return inMinutosIntervalo.value = valorInMinutosIntervalo
-})
+}
+btnAumentarIntervalo.addEventListener("click", aumentarIntervalo)
 
 /*Numero de ciclos */
 
@@ -77,16 +89,19 @@ var valorInCiclos = parseInt(inCiclos.value)
 var btnDiminuirCiclos = document.getElementById("btnDiminuirCiclos")
 var btnAumentarCiclos = document.getElementById("btnAumentarCiclos")
 
-btnDiminuirCiclos.addEventListener("click", function() {
+function diminuirCiclos() {
     if(valorInCiclos <= 0) {
         return
     }
     valorInCiclos -= 1;
     return inCiclos.value = valorInCiclos
-})
+}
 
-btnAumentarCiclos.addEventListener("click", function() {
+btnDiminuirCiclos.addEventListener("click", diminuirCiclos)
+
+function aumentarCiclos() {
     valorInCiclos += 1;
     return inCiclos.value = valorInCiclos
-})
+}
+btnAumentarCiclos.addEventListener("click", aumentarCiclos)
 
