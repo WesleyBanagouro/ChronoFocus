@@ -58,6 +58,7 @@ function start(){
             btnComecar.textContent = "Começar";
             btnCampoComecar.setAttribute("id", "comecar")
           }
+
     }
 }
 
