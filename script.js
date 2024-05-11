@@ -40,7 +40,7 @@ function start(){
     } else {
         if (btnComecar.textContent === "Começar") {
             minutosCirculo.textContent = inMinutosFoco.value
-            numeroCiclos.textContent = "Ciclos: 1/" + inCiclos.value
+            numeroCiclos.textContent += " 1/" + inCiclos.value
             avisoPreenchimento.style.color = "transparent";
             btnComecar.textContent = "Pausar";
             btnCampoComecar.setAttribute("id", "active")
@@ -58,17 +58,9 @@ function start(){
             btnComecar.textContent = "Começar";
             btnCampoComecar.setAttribute("id", "comecar")
           }
+
     }
-}
-
-
-
-
-
-
-
-
-btnCampoComecar.addEventListener("click", start)
+})
 
 
 
