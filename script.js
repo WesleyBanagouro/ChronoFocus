@@ -31,7 +31,9 @@ function aumentarFoco() {
     return inMinutosFoco.value = valorInMinutosFoco
 }
 
-btnAumentarFoco.addEventListener("click", aumentarFoco)
+btnAumentarFoco.addEventListener("click", aumentarFoco);
+var circuloProgresso = document.getElementById('circulo-progresso')
+
 
 function start(){
     if(inMinutosFoco.value == 0 || inMinutosIntervalo.value == 0 || inCiclos.value == 0) {
@@ -47,11 +49,17 @@ function start(){
             var contador = 0;
             var interval = setInterval(function() {
                 contador++;
-                if (contador <= inMinutosFoco.value) {
-                    var tempoRestante = inMinutosFoco.value - contador;
+                if (contador <= (inMinutosFoco.value * 60)) {
+                    var segundosFoco = inMinutosFoco.value * 60
+                    var tempoRestante = segundosFoco - contador;
                     minutosCirculo.textContent = tempoRestante;
+                    var circulo = (tempoRestante * 360) / segundosFoco
+                    circuloProgresso.style.background = `conic-gradient(#FF2E2E ${circulo}deg, #1E1F25 0deg)` 
                 } else {
-                    clearInterval(interval); // Parar o loop quando terminar
+                    clearInterval(interval);
+                    btnComecar.textContent = "Começar";
+                    btnCampoComecar.setAttribute("id", "comecar")
+                    circuloProgresso.style.background = 'conic-gradient(#FF2E2E 360deg, #1E1F25 0deg)'
                 }
             }, 1000);
           } else {
