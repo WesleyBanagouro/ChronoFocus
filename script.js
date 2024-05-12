@@ -34,6 +34,8 @@ function aumentarFoco() {
 btnAumentarFoco.addEventListener("click", aumentarFoco);
 var circuloProgresso = document.getElementById('circulo-progresso')
 
+var textoTempoRestante = document.getElementById('minutos-restantes')
+
 
 function start(){
     if(inMinutosFoco.value == 0 || inMinutosIntervalo.value == 0 || inCiclos.value == 0) {
@@ -41,7 +43,6 @@ function start(){
         return
     } else {
         if (btnComecar.textContent === "Começar") {
-            minutosCirculo.textContent = inMinutosFoco.value
             numeroCiclos.textContent = "Ciclos: 1/" + inCiclos.value
             avisoPreenchimento.style.color = "transparent";
             btnComecar.textContent = "Pausar";
@@ -51,10 +52,16 @@ function start(){
                 contador++;
                 if (contador <= (inMinutosFoco.value * 60)) {
                     var segundosFoco = inMinutosFoco.value * 60
-                    var tempoRestante = segundosFoco - contador;
-                    minutosCirculo.textContent = tempoRestante;
-                    var circulo = (tempoRestante * 360) / segundosFoco
-                    circuloProgresso.style.background = `conic-gradient(#FF2E2E ${circulo}deg, #1E1F25 0deg)` 
+                    var tempoRestante = segundosFoco - contador
+                    var minutosFoco = tempoRestante / 60
+                    if (tempoRestante < 60) {
+                        minutosCirculo.textContent = Math.floor(tempoRestante);
+                        textoTempoRestante.textContent = 'segundos restantes'
+                    } else {
+                        minutosCirculo.textContent = Math.floor(minutosFoco);
+                    }
+                    var circuloTimer = (tempoRestante * 360) / segundosFoco
+                    circuloProgresso.style.background = `conic-gradient(#FF2E2E ${circuloTimer}deg, #1E1F25 0deg)` 
                 } else {
                     clearInterval(interval);
                     btnComecar.textContent = "Começar";
@@ -69,6 +76,8 @@ function start(){
 
     }
 }
+
+    
 
 
 
