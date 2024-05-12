@@ -37,56 +37,52 @@ var circuloProgresso = document.getElementById('circulo-progresso')
 var textoTempoRestante = document.getElementById('minutos-restantes')
 
 
-function start(){
-    if(inMinutosFoco.value == 0 || inMinutosIntervalo.value == 0 || inCiclos.value == 0) {
+var timerPausado = false; // Variável para controlar o estado do temporizador
+var interval; // Variável para armazenar o intervalo
+
+function start() {
+    if (inMinutosFoco.value == 0 || inMinutosIntervalo.value == 0 || inCiclos.value == 0) {
         avisoPreenchimento.style.color = 'yellow';
-        return
+        return;
     } else {
         if (btnComecar.textContent === "Começar") {
-            numeroCiclos.textContent = "Ciclos: 1/" + inCiclos.value
+            numeroCiclos.textContent = "Ciclos: 1/" + inCiclos.value;
             avisoPreenchimento.style.color = "transparent";
             btnComecar.textContent = "Pausar";
-            btnCampoComecar.setAttribute("id", "active")
+            btnCampoComecar.setAttribute("id", "active");
             var contador = 0;
-            var interval = setInterval(function() {
+            interval = setInterval(function() {
                 contador++;
-                if (contador <= (inMinutosFoco.value * 60)) {
-                    var segundosFoco = inMinutosFoco.value * 60
-                    var tempoRestante = segundosFoco - contador
-                    var minutosFoco = tempoRestante / 60
+                if (!timerPausado && contador <= inMinutosFoco.value * 60) {
+                    var segundosFoco = inMinutosFoco.value * 60;
+                    var tempoRestante = segundosFoco - contador;
+                    var minutosFoco = tempoRestante / 60;
                     if (tempoRestante < 60) {
                         minutosCirculo.textContent = Math.floor(tempoRestante);
-                        textoTempoRestante.textContent = 'segundos restantes'
+                        textoTempoRestante.textContent = 'segundos restantes';
                     } else {
                         minutosCirculo.textContent = Math.floor(minutosFoco);
                     }
-                    var circuloTimer = (tempoRestante * 360) / segundosFoco
-                    circuloProgresso.style.background = `conic-gradient(#FF2E2E ${circuloTimer}deg, #1E1F25 0deg)` 
+                    var circuloTimer = (tempoRestante * 360) / segundosFoco;
+                    circuloProgresso.style.background = `conic-gradient(#FF2E2E ${circuloTimer}deg, #1E1F25 0deg)`;
                 } else {
                     clearInterval(interval);
                     btnComecar.textContent = "Começar";
-                    btnCampoComecar.setAttribute("id", "comecar")
-                    circuloProgresso.style.background = 'conic-gradient(#FF2E2E 360deg, #1E1F25 0deg)'
+                    btnCampoComecar.setAttribute("id", "comecar");
+                    circuloProgresso.style.background = 'conic-gradient(#FF2E2E 360deg, #1E1F25 0deg)';
                 }
             }, 1000);
-          } else {
-            btnComecar.textContent = "Começar";
-            btnCampoComecar.setAttribute("id", "comecar")
-          }
-
+        } else {
+            // Pausar o temporizador
+            timerPausado = true;
+            btnComecar.textContent = "Continuar";
+        }
     }
 }
 
-    
+// Event Listener para o botão de pausar/continuar
+btnCampoComecar.addEventListener("click", start);
 
-
-
-
-
-
-
-
-btnCampoComecar.addEventListener("click", start)
 
 
 
