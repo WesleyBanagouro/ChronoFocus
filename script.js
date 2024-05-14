@@ -38,7 +38,7 @@ var textoTempoRestante = document.getElementById('minutos-restantes')
 
 
 var timerPausado = false; // Variável para controlar o estado do temporizador
-var interval; // Variável para armazenar o intervalo
+var interval; // Variável para armazenar o interval
 
 function start() {
     if (inMinutosFoco.value == 0 || inMinutosIntervalo.value == 0 || inCiclos.value == 0) {
