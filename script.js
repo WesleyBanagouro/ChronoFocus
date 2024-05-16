@@ -50,6 +50,7 @@ function start() {
             numeroCiclos.textContent = "Ciclos: 1/" + inCiclos.value;
             avisoPreenchimento.style.color = "transparent";
             btnComecar.textContent = "Pausar";
+            btnAumentarFoco.setAttribute("disabled", "")
             btnCampoComecar.setAttribute("id", "active");
                 interval = setInterval(function() {
                 contador++;
@@ -62,6 +63,7 @@ function start() {
                         textoTempoRestante.textContent = 'segundos restantes';
                     } else {
                         minutosCirculo.textContent = Math.floor(minutosFoco);
+                        textoTempoRestante.textContent = 'minutos restantes';
                     }
                     var circuloTimer = (tempoRestante * 360) / segundosFoco;
                         circuloProgresso.style.background = `conic-gradient(#FF2E2E ${circuloTimer}deg, #1E1F25 0deg)`;
