@@ -1,4 +1,4 @@
-/*Minutos foco*/
+/*Minutos foco */
 
 var inMinutosFoco = document.getElementById("foco-set")
 var valorInMinutosFoco = parseInt(inMinutosFoco.value)
