@@ -120,6 +120,12 @@ function pause() {
 
 
   function reiniciar() {
+    valorInMinutosFoco = 0;
+    valorInCiclos = 0;
+    valorInMinutosIntervalo = 0;
+    inMinutosFoco.value = 0;
+    inMinutosIntervalo.value = 0
+    inCiclos.value = 0
     clearInterval(interval);
     btnComecar.textContent = "Começar";
     btnCampoComecar.setAttribute("id", "comecar");
