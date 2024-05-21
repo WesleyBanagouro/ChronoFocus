@@ -1,5 +1,11 @@
 /*Minutos foco */
 
+window.addEventListener("load", function() {
+  numeroCiclos.textContent = "Ciclos: 1/" + inCiclos.value;
+  minutosCirculo.textContent = valorInMinutosFoco;
+  textoTempoRestante.textContent = 'minutos restantes';
+})
+
 var inMinutosFoco = document.getElementById("foco-set")
 var valorInMinutosFoco = parseInt(inMinutosFoco.value)
 
@@ -39,50 +45,121 @@ var textoTempoRestante = document.getElementById('minutos-restantes')
 
 var timerPausado = false; // Variável para controlar o estado do temporizador
 var interval; // Variável para armazenar o intervalo
+var contador = 0;
+
+
+const allButtons = document.querySelectorAll('button');
+const allInputs = document.querySelectorAll('input');
+const excludedButtons = ['btnComecar', 'btnPausar', 'btnReiniciar'];
 
 function start() {
+    for (const button of allButtons) {
+        if (!excludedButtons.includes(button.id)) {
+          button.setAttribute('disabled', '');
+        }
+      }
+      for (const input of allInputs) {
+        input.setAttribute('disabled', '');
+      }
     if (inMinutosFoco.value == 0 || inMinutosIntervalo.value == 0 || inCiclos.value == 0) {
         avisoPreenchimento.style.color = 'yellow';
+        for (const button of allButtons) {
+            if (!excludedButtons.includes(button.id)) {
+              button.removeAttribute('disabled');
+            }
+          }
+          for (const input of allInputs) {
+            input.removeAttribute('disabled');
+          }
         return;
-    } else {
-        if (btnComecar.textContent === "Começar") {
+    } else if (btnComecar.textContent === "Começar") {
+            timerPausado = false;
             numeroCiclos.textContent = "Ciclos: 1/" + inCiclos.value;
             avisoPreenchimento.style.color = "transparent";
             btnComecar.textContent = "Pausar";
             btnCampoComecar.setAttribute("id", "active");
-            var contador = 0;
-            interval = setInterval(function() {
+                interval = setInterval(function() {
                 contador++;
                 if (!timerPausado && contador <= inMinutosFoco.value * 60) {
-                    var segundosFoco = inMinutosFoco.value * 60;
+                    var segundosFoco  = inMinutosFoco.value * 60;
                     var tempoRestante = segundosFoco - contador;
-                    var minutosFoco = tempoRestante / 60;
+                    var minutosFoco   = tempoRestante / 60;
                     if (tempoRestante < 60) {
                         minutosCirculo.textContent = Math.floor(tempoRestante);
                         textoTempoRestante.textContent = 'segundos restantes';
                     } else {
                         minutosCirculo.textContent = Math.floor(minutosFoco);
-                    }
+                        textoTempoRestante.textContent = 'minutos restantes';
+                      }
                     var circuloTimer = (tempoRestante * 360) / segundosFoco;
-                    circuloProgresso.style.background = `conic-gradient(#FF2E2E ${circuloTimer}deg, #1E1F25 0deg)`;
+                        circuloProgresso.style.background = `conic-gradient(#FF2E2E ${circuloTimer}deg, #1E1F25 0deg)`;
                 } else {
                     clearInterval(interval);
                     btnComecar.textContent = "Começar";
                     btnCampoComecar.setAttribute("id", "comecar");
                     circuloProgresso.style.background = 'conic-gradient(#FF2E2E 360deg, #1E1F25 0deg)';
+                    contador = 0
+                    timerPausado = false
                 }
             }, 1000);
-        } else {
-            // Pausar o temporizador
-            timerPausado = true;
-            btnComecar.textContent = "Continuar";
         }
-    }
 }
 
-// Event Listener para o botão de pausar/continuar
-btnCampoComecar.addEventListener("click", start);
+function pause() {
+    clearInterval(interval);
+    btnComecar.textContent = "Começar";
+    btnCampoComecar.setAttribute("id", "comecar");
+    for (const button of allButtons) {
+        if (!excludedButtons.includes(button.id)) {
+          button.removeAttribute('disabled');
+        }
+      }
+      for (const input of allInputs) {
+        input.removeAttribute('disabled');
+      }
+  }
 
+
+ 
+  var btnCampoReiniciar = document.getElementById("reiniciar")
+
+
+  function reiniciar() {
+    valorInMinutosFoco = 0;
+    valorInCiclos = 0;
+    valorInMinutosIntervalo = 0;
+    inMinutosFoco.value = 0;
+    inMinutosIntervalo.value = 0
+    inCiclos.value = 0
+    clearInterval(interval);
+    btnComecar.textContent = "Começar";
+    btnCampoComecar.setAttribute("id", "comecar");
+    circuloProgresso.style.background = 'conic-gradient(#FF2E2E 360deg, #1E1F25 0deg)';
+    contador = 0
+    timerPausado = false
+    minutosCirculo.textContent = 0;
+    for (const button of allButtons) {
+        if (!excludedButtons.includes(button.id)) {
+          button.removeAttribute('disabled');
+        }
+      }
+      for (const input of allInputs) {
+        input.removeAttribute('disabled');
+      }
+  }
+
+  btnCampoReiniciar.addEventListener("click", reiniciar)
+
+
+  
+  
+  btnCampoComecar.addEventListener("click", () => {
+    if (btnComecar.textContent === "Começar") {
+      start();
+    } else {
+      pause();
+    }
+  });
 
 
 
@@ -91,8 +168,8 @@ btnCampoComecar.addEventListener("click", start);
 var inMinutosIntervalo = document.getElementById("intervalo-set")
 var valorInMinutosIntervalo = parseInt(inMinutosIntervalo.value)
 
-var btnAumentarFoco = document.getElementById("btnAumentarIntervalo")
-var btnDiminuirFoco = document.getElementById("btnDiminuirIntervalo")
+var btnAumentarIntervalo = document.getElementById("btnAumentarIntervalo")
+var btnDiminuirIntervalo = document.getElementById("btnDiminuirIntervalo")
 
 function diminuirIntervalo() {
     if(valorInMinutosIntervalo <= 0) {
@@ -133,4 +210,3 @@ function aumentarCiclos() {
     return inCiclos.value = valorInCiclos
 }
 btnAumentarCiclos.addEventListener("click", aumentarCiclos)
-
