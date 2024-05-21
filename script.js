@@ -45,12 +45,6 @@ var textoTempoRestante = document.getElementById('minutos-restantes')
 
 var timerPausado = false; // Variável para controlar o estado do temporizador
 var interval; // Variável para armazenar o intervalo
-var contador = 0;
-
-
-const allButtons = document.querySelectorAll('button');
-const allInputs = document.querySelectorAll('input');
-const excludedButtons = ['btnComecar', 'btnPausar', 'btnReiniciar'];
 
 function start() {
     for (const button of allButtons) {
