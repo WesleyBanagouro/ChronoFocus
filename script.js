@@ -3,7 +3,7 @@
 window.addEventListener("load", function() {
   numeroCiclos.textContent = "Ciclos: 1/" + inCiclos.value;
   minutosCirculo.textContent = valorInMinutosFoco;
-  textoTempoRestante.textContent = 'minutos restantes';
+  textoTempoRestante.innerHTML = 'minutos</br>restantes';
 })
 
 var inMinutosFoco = document.getElementById("foco-set")
@@ -63,6 +63,7 @@ function start() {
       }
     if (inMinutosFoco.value == 0 || inMinutosIntervalo.value == 0 || inCiclos.value == 0) {
         avisoPreenchimento.style.color = 'yellow';
+        avisoPreenchimento.style.fontSize = '0.6em'
         for (const button of allButtons) {
             if (!excludedButtons.includes(button.id)) {
               button.removeAttribute('disabled');

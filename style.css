@@ -51,8 +51,8 @@ body {
     align-items: center;
     color: white;
     text-align: center;
-    width: auto;
-    height: 300px;
+    width: 11.5rem;
+    height: 15.7rem;
     flex-direction: column;
     padding: 0.625rem 1.25rem 0.625rem 1.25rem;
 }
@@ -73,12 +73,12 @@ body {
 #aviso-preenchimento {
     width: 50%;
     color: transparent;
-    font-size: 0.75rem;
+    font-size: 0.6em;
 }
 
 #titulo p{
     border-bottom: solid white;
-    height: auto;
+    height: 1.5em;
     margin: 0px;
 }
 
@@ -89,7 +89,7 @@ body {
 
 .set-menu {
     display: flex;
-    font-size: 1em;
+    font-size: 0.9em;
     align-items: center;
     justify-content: space-between;
     width: 100%;
@@ -174,8 +174,8 @@ body {
     justify-content: center;
     background-color: #FF2E2E;
     border-radius: 0.625rem;
-    width: 100%;
-    height: 2.51rem;
+    width: 11rem;
+    height: 2rem;
     cursor: pointer;
     border: solid transparent 0.1em;
 }
@@ -198,8 +198,8 @@ body {
     justify-content: center;
     background-color: gray;
     border-radius: 0.625rem;
-    width: 100%;
-    height: 2.51rem;
+    width: 11rem;
+    height: 2rem;
     cursor: pointer;
     border: solid transparent 0.1em;
 }
@@ -220,8 +220,8 @@ body {
     justify-content: center;
     background-color: #FFe600;
     border-radius: 0.625rem;
-    width: 100%;
-    height: 2.51rem;
+    width: 11rem;
+    height: 2rem;
     cursor: pointer;
     border: solid transparent 0.1em;
 }
@@ -251,8 +251,8 @@ body {
 
 #circulo-progresso {
     background: conic-gradient(#FF2E2E 360deg, #1E1F25 0deg);
-    width: 90%;
-    height: 90%;
+    width: 9rem;
+    height: 9rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -261,8 +261,8 @@ body {
 
 #circulo-fundo {
     background-color: #1E1F25;
-    width: 90%;
-    height: 90%;
+    width: 8rem;
+    height: 8rem;
     border-radius: 50%;
     display: flex;
     justify-content: center;
