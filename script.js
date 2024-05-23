@@ -42,6 +42,12 @@ var circuloProgresso = document.getElementById('circulo-progresso')
 
 var textoTempoRestante = document.getElementById('minutos-restantes')
 
+window.addEventListener("load", function() {
+  inMinutosFoco.value = 25;
+  inMinutosIntervalo.value = 5;
+  inCiclos.value = 4;
+  minutosCirculo.textContent = inMinutosFoco.value
+});
 
 var timerPausado = false; // Variável para controlar o estado do temporizador
 var interval; // Variável para armazenar o intervalo
@@ -51,6 +57,7 @@ var contador = 0;
 const allButtons = document.querySelectorAll('button');
 const allInputs = document.querySelectorAll('input');
 const excludedButtons = ['btnComecar', 'btnPausar', 'btnReiniciar'];
+
 
 function start() {
     for (const button of allButtons) {
@@ -79,8 +86,8 @@ function start() {
             avisoPreenchimento.style.color = "transparent";
             btnComecar.textContent = "Pausar";
             btnCampoComecar.setAttribute("id", "active");
-                interval = setInterval(function() {
-                contador++;
+            interval = setInterval(function() {
+            contador++;
                 if (!timerPausado && contador <= inMinutosFoco.value * 60) {
                     var segundosFoco  = inMinutosFoco.value * 60;
                     var tempoRestante = segundosFoco - contador;
@@ -94,19 +101,13 @@ function start() {
                       }
                     var circuloTimer = (tempoRestante * 360) / segundosFoco;
                         circuloProgresso.style.background = `conic-gradient(#FF2E2E ${circuloTimer}deg, #1E1F25 0deg)`;
-                } else {
-                    clearInterval(interval);
-                    btnComecar.textContent = "Começar";
-                    btnCampoComecar.setAttribute("id", "comecar");
-                    circuloProgresso.style.background = 'conic-gradient(#FF2E2E 360deg, #1E1F25 0deg)';
-                    contador = 0
-                    timerPausado = false
                 }
             }, 1000);
         }
 }
 
 function pause() {
+  estadoTimer = 'pausado'
     clearInterval(interval);
     btnComecar.textContent = "Começar";
     btnCampoComecar.setAttribute("id", "comecar");
@@ -148,6 +149,13 @@ function pause() {
         input.removeAttribute('disabled');
       }
   }
+
+btnAumentarFoco.addEventListener("click", function() {
+    if (confirm("Deseja começar um novo tempo?")) {
+        circuloProgresso.style.background = `conic-gradient(#FF2E2E 360deg, #1E1F25 0deg)`;
+        contador = 0;
+    }
+});
 
   btnCampoReiniciar.addEventListener("click", reiniciar)
 
