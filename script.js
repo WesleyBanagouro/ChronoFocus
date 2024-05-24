@@ -1,4 +1,4 @@
-/*Minutos foco */
+/*Minutos foco*/
 
 window.addEventListener("load", function() {
   numeroCiclos.textContent = "Ciclos: 1/" + inCiclos.value;
