@@ -57,9 +57,11 @@ var contador = 0;
 const allButtons = document.querySelectorAll('button');
 const allInputs = document.querySelectorAll('input');
 const excludedButtons = ['btnComecar', 'btnPausar', 'btnReiniciar'];
+let timerAtivo = false;
 
 
 function start() {
+  timerAtivo = true;
     for (const button of allButtons) {
         if (!excludedButtons.includes(button.id)) {
           button.setAttribute('disabled', '');
@@ -107,6 +109,7 @@ function start() {
 }
 
 function pause() {
+  timerAtivo = false;
   estadoTimer = 'pausado'
     clearInterval(interval);
     btnComecar.textContent = "Começar";
@@ -127,6 +130,7 @@ function pause() {
 
 
   function reiniciar() {
+    timerAtivo = false;
     valorInMinutosFoco = 0;
     valorInCiclos = 0;
     valorInMinutosIntervalo = 0;
@@ -149,7 +153,7 @@ function pause() {
         input.removeAttribute('disabled');
       }
   }
-
+  
 btnAumentarFoco.addEventListener("click", function() {
     if (confirm("Deseja começar um novo tempo?")) {
         circuloProgresso.style.background = `conic-gradient(#FF2E2E 360deg, #1E1F25 0deg)`;
@@ -163,6 +167,11 @@ btnAumentarFoco.addEventListener("click", function() {
   
   
   btnCampoComecar.addEventListener("click", () => {
+    if(timerAtivo) {
+      console.log(timerAtivo);
+    } else {
+      console.log(timerAtivo)
+    }
     if (btnComecar.textContent === "Começar") {
       start();
     } else {
