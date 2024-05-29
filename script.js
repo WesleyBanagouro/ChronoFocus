@@ -57,127 +57,126 @@ var contador = 0;
 const allButtons = document.querySelectorAll('button');
 const allInputs = document.querySelectorAll('input');
 const excludedButtons = ['btnComecar', 'btnPausar', 'btnReiniciar'];
-let timerAtivo = false;
+let timerAtivo = true;
 
+
+let eventListenersAdded = false;
 
 function start() {
-  timerAtivo = true;
+  timerAtivo = false;
+  for (const button of allButtons) {
+    if (!excludedButtons.includes(button.id)) {
+      button.setAttribute('disabled', '');
+    }
+  }
+  for (const input of allInputs) {
+    input.setAttribute('disabled', '');
+  }
+  if (inMinutosFoco.value == 0 || inMinutosIntervalo.value == 0 || inCiclos.value == 0) {
+    avisoPreenchimento.style.color = 'yellow';
+    avisoPreenchimento.style.fontSize = '0.6em';
     for (const button of allButtons) {
-        if (!excludedButtons.includes(button.id)) {
-          button.setAttribute('disabled', '');
-        }
+      if (!excludedButtons.includes(button.id)) {
+        button.removeAttribute('disabled');
       }
-      for (const input of allInputs) {
-        input.setAttribute('disabled', '');
-      }
-    if (inMinutosFoco.value == 0 || inMinutosIntervalo.value == 0 || inCiclos.value == 0) {
-        avisoPreenchimento.style.color = 'yellow';
-        avisoPreenchimento.style.fontSize = '0.6em'
-        for (const button of allButtons) {
-            if (!excludedButtons.includes(button.id)) {
-              button.removeAttribute('disabled');
-            }
-          }
-          for (const input of allInputs) {
-            input.removeAttribute('disabled');
-          }
-        return;
-    } else if (btnComecar.textContent === "Começar") {
-            timerPausado = false;
-            numeroCiclos.textContent = "Ciclos: 1/" + inCiclos.value;
-            avisoPreenchimento.style.color = "transparent";
-            btnComecar.textContent = "Pausar";
-            btnCampoComecar.setAttribute("id", "active");
-            interval = setInterval(function() {
-            contador++;
-                if (!timerPausado && contador <= inMinutosFoco.value * 60) {
-                    var segundosFoco  = inMinutosFoco.value * 60;
-                    var tempoRestante = segundosFoco - contador;
-                    var minutosFoco   = tempoRestante / 60;
-                    if (tempoRestante < 60) {
-                        minutosCirculo.textContent = Math.floor(tempoRestante);
-                        textoTempoRestante.textContent = 'segundos restantes';
-                    } else {
-                        minutosCirculo.textContent = Math.floor(minutosFoco);
-                        textoTempoRestante.textContent = 'minutos restantes';
-                      }
-                    var circuloTimer = (tempoRestante * 360) / segundosFoco;
-                        circuloProgresso.style.background = `conic-gradient(#FF2E2E ${circuloTimer}deg, #1E1F25 0deg)`;
-                }
-            }, 1000);
+    }
+    for (const input of allInputs) {
+      input.removeAttribute('disabled');
+    }
+    return;
+  } else if (btnComecar.textContent === "Começar") {
+    timerPausado = false;
+    numeroCiclos.textContent = "Ciclos: 1/" + inCiclos.value;
+    avisoPreenchimento.style.color = "transparent";
+    btnComecar.textContent = "Pausar";
+    btnCampoComecar.setAttribute("id", "active");
+    interval = setInterval(function () {
+      contador++;
+      if (!timerPausado && contador <= inMinutosFoco.value * 60) {
+        var segundosFoco = inMinutosFoco.value * 60;
+        var tempoRestante = segundosFoco - contador;
+        var minutosFoco = tempoRestante / 60;
+        if (tempoRestante < 60) {
+          minutosCirculo.textContent = Math.floor(tempoRestante);
+          textoTempoRestante.textContent = 'segundos restantes';
+        } else {
+          minutosCirculo.textContent = Math.floor(minutosFoco);
+          textoTempoRestante.textContent = 'minutos restantes';
         }
+        var circuloTimer = (tempoRestante * 360) / segundosFoco;
+        circuloProgresso.style.background = `conic-gradient(#FF2E2E ${circuloTimer}deg, #1E1F25 0deg)`;
+      }
+    }, 1000);
+  }
 }
 
 function pause() {
-  timerAtivo = false;
-  estadoTimer = 'pausado'
-    clearInterval(interval);
-    btnComecar.textContent = "Começar";
-    btnCampoComecar.setAttribute("id", "comecar");
-    for (const button of allButtons) {
-        if (!excludedButtons.includes(button.id)) {
-          button.removeAttribute('disabled');
-        }
-      }
-      for (const input of allInputs) {
-        input.removeAttribute('disabled');
-      }
+  timerAtivo = true;
+  estadoTimer = 'pausado';
+  clearInterval(interval);
+  btnComecar.textContent = "Começar";
+  btnCampoComecar.setAttribute("id", "comecar");
+  for (const button of allButtons) {
+    if (!excludedButtons.includes(button.id)) {
+      button.removeAttribute('disabled');
+    }
   }
-
-
- 
-  var btnCampoReiniciar = document.getElementById("reiniciar")
-
-
-  function reiniciar() {
-    timerAtivo = false;
-    valorInMinutosFoco = 0;
-    valorInCiclos = 0;
-    valorInMinutosIntervalo = 0;
-    inMinutosFoco.value = 0;
-    inMinutosIntervalo.value = 0
-    inCiclos.value = 0
-    clearInterval(interval);
-    btnComecar.textContent = "Começar";
-    btnCampoComecar.setAttribute("id", "comecar");
-    circuloProgresso.style.background = 'conic-gradient(#FF2E2E 360deg, #1E1F25 0deg)';
-    contador = 0
-    timerPausado = false
-    minutosCirculo.textContent = 0;
-    for (const button of allButtons) {
-        if (!excludedButtons.includes(button.id)) {
-          button.removeAttribute('disabled');
-        }
-      }
-      for (const input of allInputs) {
-        input.removeAttribute('disabled');
-      }
+  for (const input of allInputs) {
+    input.removeAttribute('disabled');
   }
-  
-btnAumentarFoco.addEventListener("click", function() {
+}
+
+var btnCampoReiniciar = document.getElementById("reiniciar");
+
+function reiniciar() {
+  timerAtivo = true;
+  valorInMinutosFoco = 0;
+  valorInCiclos = 0;
+  valorInMinutosIntervalo = 0;
+  inMinutosFoco.value = 0;
+  inMinutosIntervalo.value = 0;
+  inCiclos.value = 0;
+  clearInterval(interval);
+  btnComecar.textContent = "Começar";
+  btnCampoComecar.setAttribute("id", "comecar");
+  circuloProgresso.style.background = 'conic-gradient(#FF2E2E 360deg, #1E1F25 0deg)';
+  contador = 0;
+  timerPausado = false;
+  minutosCirculo.textContent = 0;
+  for (const button of allButtons) {
+    if (!excludedButtons.includes(button.id)) {
+      button.removeAttribute('disabled');
+    }
+  }
+  for (const input of allInputs) {
+    input.removeAttribute('disabled');
+  }
+}
+
+btnCampoReiniciar.addEventListener("click", reiniciar);
+
+if (!eventListenersAdded) {
+  inMinutosFoco.addEventListener("input", function () {
+    console.log("está mexendo no input");
+  });
+
+  btnAumentarFoco.addEventListener("click", function () {
     if (confirm("Deseja começar um novo tempo?")) {
-        circuloProgresso.style.background = `conic-gradient(#FF2E2E 360deg, #1E1F25 0deg)`;
-        contador = 0;
-    }
-});
-
-  btnCampoReiniciar.addEventListener("click", reiniciar)
-
-
-  
-  
-  btnCampoComecar.addEventListener("click", () => {
-    if(timerAtivo) {
-      console.log(timerAtivo);
-    } else {
-      console.log(timerAtivo)
-    }
-    if (btnComecar.textContent === "Começar") {
-      start();
-    } else {
-      pause();
+      circuloProgresso.style.background = `conic-gradient(#FF2E2E 360deg, #1E1F25 0deg)`;
+      contador = 0;
     }
   });
+
+  eventListenersAdded = true;
+}
+
+btnCampoComecar.addEventListener("click", () => {
+  if (btnComecar.textContent === "Começar") {
+    start();
+  } else {
+    pause();
+  }
+});
 
 
 
