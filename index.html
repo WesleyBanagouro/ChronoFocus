@@ -16,29 +16,29 @@
                     * Preencha todos os campos abaixo
                 </span>
             </div>
-            <div class="box" id="time">
+            <div class="box" id="elemento-pai">
                 <div class="set-menu">
                     <p>Foco</p>
                     <div id="foco">
-                        <button id="btnDiminuirFoco">-</button>
-                        <input type="number" id="foco-set" value="0">
-                        <button id="btnAumentarFoco">+</button>
+                        <button class="menos">-</button>
+                        <input type="number" class="campo" id="foco-set" value="25">
+                        <button class="mais">+</button>
                     </div>
                 </div>
                 <div class="set-menu">
                     <p>Intervalo</p>
                     <div id="intervalo">
-                        <button id="btnDiminuirIntervalo">-</button>
-                        <input type="number" id="intervalo-set" value="0">
-                        <button id="btnAumentarIntervalo">+</button>
+                        <button class="menos">-</button>
+                        <input type="number" class="campo" id="intervalo-set" value="5">
+                        <button class="mais">+</button>
                     </div>
                 </div>
                 <div class="set-menu">
                     <p>Ciclos</p>
                     <div id="ciclos">
-                        <button id="btnDiminuirCiclos">-</button>
-                        <input type="number" id="ciclos-set" value="0">
-                        <button id="btnAumentarCiclos">+</button>
+                        <button class="menos">-</button>
+                        <input type="number" class="campo" id="ciclos-set" value="4">
+                        <button class="mais">+</button>
                     </div>
                 </div>
             </div>
@@ -53,17 +53,17 @@
         </div>
         <div class="card" id="clock">
             <div class="box titulo-foco" id="titulo">
-                <p>Foco 🍅</p>
+                <p id="textoTimer">Foco 🍅</p>
             </div>
             <div class="box" id="circulo-status">
-                <div id="circulo-progresso">
+                <div class='' id="circulo-progresso">
                     <div id="circulo-fundo">
                         <div id="box-minutos">
                             <p id="minutos-circulo">
                                 
                             </p>
                             <p id="minutos-restantes">
-                                minutos restantes
+                                
                             </p>
                         </div>
                     </div>
