@@ -170,6 +170,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+<<<<<<< HEAD
     background-color: var(--corFoco);
     border-radius: 0.625rem;
     width: 11rem;
@@ -183,6 +184,9 @@ body {
     align-items: center;
     justify-content: center;
     background-color: var(--corIntervalo);
+=======
+    background-color: #FF2E2E;
+>>>>>>> 1cea552c5b7743981d9a1faae2b952721a7fba20
     border-radius: 0.625rem;
     width: 11rem;
     height: 2rem;
@@ -268,7 +272,11 @@ body {
 
 
 #circulo-progresso {
+<<<<<<< HEAD
     background: conic-gradient(var(--corFoco) 360deg, #1E1F25 0deg);
+=======
+    background: conic-gradient(#FF2E2E 360deg, #1E1F25 0deg);
+>>>>>>> 1cea552c5b7743981d9a1faae2b952721a7fba20
     width: 9rem;
     height: 9rem;
     display: flex;
