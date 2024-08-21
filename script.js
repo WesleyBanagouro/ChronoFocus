@@ -61,11 +61,15 @@ var contador = 0;
 var tempoRestante = 1500;
 var emFoco = true;
 
+var contadorCiclos = 1;
+
 
 
 const allButtons = document.querySelectorAll('button');
 const allInputs = document.querySelectorAll('input');
 const excludedButtons = ['btnComecar', 'btnPausar', 'btnReiniciar'];
+
+
 
 function configurarBotoes() {
   for (const button of allButtons) {
@@ -125,6 +129,19 @@ function timer(minutosTimer, cor) {
         console.log("está em foco")
       }
       clearInterval(interval);
+      if(emFoco) {
+        if(inMinutosIntervalo.value < 1) {
+          minutosCirculo.textContent = inMinutosFoco.value * 60;
+        } else {
+          minutosCirculo.textContent = inMinutosFoco.value
+        }
+      } else {
+        if(inMinutosFoco.value < 1) {
+          minutosCirculo.textContent = inMinutosIntervalo.value * 60;
+        } else {
+          minutosCirculo.textContent = inMinutosIntervalo.value
+        }
+      }
       contador = 0;
       configurarBotoes()
       btnComecar.textContent = "Começar";
@@ -132,39 +149,59 @@ function timer(minutosTimer, cor) {
     }
 }
 
+function validacaoPreenchimento() {
+  avisoPreenchimento.style.color = 'yellow';
+    avisoPreenchimento.style.fontSize = '0.6em'
+    for (const button of allButtons) {
+        if (!excludedButtons.includes(button.id)) {
+          button.removeAttribute('disabled');
+        }
+      }
+      for (const input of allInputs) {
+        input.removeAttribute('disabled');
+      }
+}
+
 function start() {
   configurarBotoes();
-    if (btnComecar.textContent === "Começar") {
+  if (inMinutosFoco.value == 0 || inMinutosIntervalo.value == 0 || inCiclos.value == 0) {
+    validacaoPreenchimento()
+    return
+}
+  if (btnComecar.textContent === "Começar") {
             timerPausado = false;
-            numeroCiclos.textContent = "Ciclos: 1/" + inCiclos.value;
+            numeroCiclos.textContent = `Ciclos: ${contadorCiclos}/${inCiclos.value}`;
             avisoPreenchimento.style.color = "transparent";
             btnComecar.textContent = "Pausar";
             btnCampoComecar.setAttribute("id", "active");
             interval = setInterval(function(){
               timer(inMinutosFoco, corFoco)
             }, 1000);
-        }       
+        }
+        console.log(contadorCiclos)       
 }
 
 function intervalo() {
   configurarBotoes();
   if (btnComecar.textContent === "Começar") {
     timerPausado = false;
-    numeroCiclos.textContent = "Ciclos: 1/" + inCiclos.value;
-    avisoPreenchimento.style.color = "transparent";
     btnComecar.textContent = "Pausar";
     btnCampoComecar.setAttribute("id", "active");
     interval = setInterval(function(){
       timer(inMinutosIntervalo, corIntervalo)
     }, 1000);
+    contadorCiclos++
+    return contadorCiclos
 }
 }
 
 function novoTempo() {
   if(confirm("Quer começar um novo tempo?")) {
     reiniciar()
-  } else {
+  } else if (emFoco) {
     start()
+  } else {
+    intervalo()
   }
 }
 
