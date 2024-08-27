@@ -101,7 +101,6 @@ var avisoIntervaloLongo = false;
 
 function timer(minutosTimer, cor) {
     contador++;
-    console.log(contador)
     if (!timerPausado && contador <= minutosTimer * 60) {
         var segundosTimer  = minutosTimer * 60;
         tempoRestante = segundosTimer - contador;
@@ -115,6 +114,7 @@ function timer(minutosTimer, cor) {
           }
         var circuloTimer = (tempoRestante * 360) / segundosTimer;
             circuloProgresso.style.background = `conic-gradient(${cor} ${circuloTimer}deg, #1E1F25 0deg)`;
+
     } else {
       if(avisoIntervaloLongo) {
         btnComecar.innerHTML = "Começar intervalo";
@@ -123,7 +123,7 @@ function timer(minutosTimer, cor) {
           textoTimer.innerHTML = "Intervalo longo"
           btnCampoComecar.setAttribute("id", "intervaloSet");
           console.log("não está mais em foco")
-          contadorCiclos = 1;
+          contadorCiclos = 0;
       } else if(emFoco) { 
         btnComecar.textContent = "Começar";
           circuloProgresso.style.background = `conic-gradient(${corIntervalo} 360deg, #1E1F25 0deg)`;
@@ -132,12 +132,19 @@ function timer(minutosTimer, cor) {
           btnCampoComecar.setAttribute("id", "intervaloSet");
           console.log("não está mais em foco")
       } else {
-        btnComecar.textContent = "Começar";
-        circuloProgresso.style.background = `conic-gradient(${corFoco} 360deg, #1E1F25 0deg)`;
-        emFoco = true;
-        textoTimer.innerHTML = "Foco"
-        btnCampoComecar.setAttribute("id", "comecar");
-        console.log("está em foco")
+        if(contadorCiclos == inCiclos.value) {
+          avisoIntervaloLongo = true;
+          btnComecar.textContent = "Começar intervalo";
+        } else {
+          emIntervalo = false;
+          btnComecar.textContent = "Começar";
+          circuloProgresso.style.background = `conic-gradient(${corFoco} 360deg, #1E1F25 0deg)`;
+          emFoco = true;
+          textoTimer.innerHTML = "Foco"
+          btnCampoComecar.setAttribute("id", "comecar");
+          console.log("está em foco")
+          contadorCiclos++
+        }
       }
       clearInterval(interval);
       if(emFoco) {
@@ -156,6 +163,9 @@ function timer(minutosTimer, cor) {
       contador = 0;
       configurarBotoes()
       console.log(avisoIntervaloLongo)
+      if(avisoIntervaloLongo) {
+        avisoIntervaloLongo = false;
+      }
 
 
     }
@@ -163,7 +173,7 @@ function timer(minutosTimer, cor) {
 
 var tempoIntervaloLongo = 4 * valorInMinutosIntervalo;
 
-function intervaloLongo () {
+function intervaloLongo() {
   configurarBotoes();
   if (btnComecar.textContent === "Começar intervalo") {
     timerPausado = false;
@@ -175,7 +185,6 @@ function intervaloLongo () {
     interval = setInterval(function(){
       timer(1, corIntervalo)
     }, 1000);
-    avisoIntervaloLongo = false;
 }
 }
 
@@ -216,10 +225,11 @@ function start() {
         console.log(contadorCiclos)       
 }
 
+var emIntervalo = false;
+
 function intervalo() {
-  if(contadorCiclos == inCiclos.value) {
-    avisoIntervaloLongo = true;
-  }
+  
+  emIntervalo = true;
   configurarBotoes();
   if (btnComecar.textContent === "Começar") {
     timerPausado = false;
@@ -228,8 +238,6 @@ function intervalo() {
     interval = setInterval(function(){
       timer(inMinutosIntervalo.value, corIntervalo)
     }, 1000);
-    contadorCiclos++
-    return contadorCiclos
 }
 }
 
@@ -244,13 +252,14 @@ function novoTempo() {
 }
 
 function pause() {
+  console.log(avisoIntervaloLongo)
   elementoPai.removeEventListener("click", controleBotoes)
   timerPausado = true;
     clearInterval(interval);
     if(!avisoIntervaloLongo) {
       btnComecar.textContent = "Começar"
       btnCampoComecar.setAttribute("id", "comecar");
-    } else {
+    } else if(!emFoco && !emIntervalo && avisoIntervaloLongo){
       btnComecar.textContent = "Começar intervalo";
     }
     for (const button of allButtons) {
