@@ -114,6 +114,9 @@ var avisoIntervaloLongo = false;
 
 function timer(minutosTimer, cor) {
     contador++;
+    if(avisoIntervaloLongo) {
+      minutosTimer = minutosTimer * 4;
+    }
     if (!timerPausado && contador <= minutosTimer * 60) {
         var segundosTimer  = minutosTimer * 60;
         tempoRestante = segundosTimer - contador;
