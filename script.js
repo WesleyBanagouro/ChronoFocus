@@ -30,6 +30,19 @@ var elementoPai = document.getElementById("elemento-pai");
 
 var textoTimer = document.getElementById("textoTimer")
 
+/*Minutos intervalo */
+
+var inMinutosIntervalo = document.getElementById("intervalo-set")
+var valorInMinutosIntervalo = parseInt(inMinutosIntervalo.value)
+
+
+
+
+/*Numero de ciclos */
+
+var inCiclos = document.getElementById("ciclos-set")
+var valorInCiclos = parseInt(inCiclos.value)
+
 
 function controleBotoes(e) {
   var elementoClicado = e.target;
@@ -118,8 +131,11 @@ function timer(minutosTimer, cor) {
     } else {
       if(emFoco) {
         if(contadorCiclos == inCiclos.value) {
-          btnComecar.textContent = "Começar intervalo"
+          circuloProgresso.style.background = `conic-gradient(${corIntervalo} 360deg, #1E1F25 0deg)`;
+          btnComecar.textContent = "Começar intervalo";
+          textoTimer.innerHTML = "Intervalo longo";
           avisoIntervaloLongo = true;
+          btnCampoComecar.setAttribute("id", "intervaloSet");
         } else {
           btnCampoComecar.setAttribute("id", "intervaloSet");
           emIntervalo = true;
@@ -133,7 +149,16 @@ function timer(minutosTimer, cor) {
           emFoco = true;
           btnComecar.textContent = "Começar";
           circuloProgresso.style.background = `conic-gradient(${corFoco} 360deg, #1E1F25 0deg)`;
+          textoTimer.innerHTML = "Foco"
+          btnCampoComecar.setAttribute("id", "comecar");
+          contadorCiclos++
+      } else if(avisoIntervaloLongo) {
+        circuloProgresso.style.background = `conic-gradient(${corFoco} 360deg, #1E1F25 0deg)`;
+        contadorCiclos = 0;
+        avisoIntervaloLongo = false;
+        emIntervalo = false;
           emFoco = true;
+          btnComecar.textContent = "Começar";
           textoTimer.innerHTML = "Foco"
           btnCampoComecar.setAttribute("id", "comecar");
           contadorCiclos++
@@ -145,7 +170,7 @@ function timer(minutosTimer, cor) {
         } else {
           minutosCirculo.textContent = inMinutosFoco.value
         }
-      } else {
+      } else if(emIntervalo || avisoIntervaloLongo) {
         if(inMinutosFoco.value < 1) {
           minutosCirculo.textContent = inMinutosIntervalo.value * 60;
         } else {
@@ -158,22 +183,24 @@ function timer(minutosTimer, cor) {
     }
 }
 
-var tempoIntervaloLongo = 4 * valorInMinutosIntervalo;
 
-var tempoIntervaloLongo = 4 * valorInMinutosIntervalo;
+
+
+
+
 
 function intervaloLongo() {
   emFoco = false;
   emIntervalo = false;
   avisoIntervaloLongo = true;
   configurarBotoes();
-  if (btnComecar.textContent === "Começar intervalo") {
+  if (btnComecar.textContent === "Começar intervalo" || btnComecar.textContent === "Retomar intervalo") {
     timerPausado = false;
     avisoPreenchimento.style.color = "transparent";
     btnComecar.textContent = "Pausar";
     btnCampoComecar.setAttribute("id", "active");
     interval = setInterval(function(){
-      timer(1, corIntervalo)
+      timer(0.1, corIntervalo)
     }, 1000);
 }
 }
@@ -199,9 +226,10 @@ function start() {
   configurarBotoes();
   if (inMinutosFoco.value == 0 || inMinutosIntervalo.value == 0 || inCiclos.value == 0) {
     validacaoPreenchimento()
+    console.log(inMinutosIntervalo.value)
     return
 }
-  if (btnComecar.textContent === "Começar") {
+  if (btnComecar.textContent === "Começar" || btnComecar.textContent === "Retomar foco") {
             timerPausado = false;
             numeroCiclos.textContent = `Ciclos: ${contadorCiclos}/${inCiclos.value}`;
             avisoPreenchimento.style.color = "transparent";
@@ -219,7 +247,7 @@ function intervalo() {
   
   emIntervalo = true;
   configurarBotoes();
-  if (btnComecar.textContent === "Começar") {
+  if (btnComecar.textContent === "Começar" || btnComecar.textContent === "Retomar intervalo") {
     timerPausado = false;
     btnComecar.textContent = "Pausar";
     btnCampoComecar.setAttribute("id", "active");
@@ -246,11 +274,12 @@ function pause() {
   elementoPai.removeEventListener("click", controleBotoes)
   timerPausado = true;
     clearInterval(interval);
-    if(!avisoIntervaloLongo) {
-      btnComecar.textContent = "Começar"
+    if(emFoco) {
+      btnComecar.textContent = "Retomar foco"
       btnCampoComecar.setAttribute("id", "comecar");
-    } else {
-      btnComecar.textContent = "Começar intervalo";
+    } else if(emIntervalo || avisoIntervaloLongo){
+      btnComecar.textContent = "Retomar intervalo";
+      btnCampoComecar.setAttribute("id", "intervaloSet");
     }
     for (const button of allButtons) {
         if (!excludedButtons.includes(button.id)) {
@@ -302,11 +331,13 @@ function pause() {
   
   
   btnCampoComecar.addEventListener("click", () => {
-    if (btnComecar.textContent === "Começar") {
+    if (btnComecar.textContent === "Começar" || btnComecar.textContent === "Retomar foco" || btnComecar.textContent === "Retomar intervalo") {
       if(emFoco) {
         start();
-      } else {
+      } else if(emIntervalo) {
         intervalo();
+      } else if(avisoIntervaloLongo) {
+        intervaloLongo();
       }
     } else if(btnComecar.textContent === "Começar intervalo") {
       intervaloLongo();
@@ -317,16 +348,4 @@ function pause() {
 
 
 
-/*Minutos intervalo */
-
-var inMinutosIntervalo = document.getElementById("intervalo-set")
-var valorInMinutosIntervalo = parseInt(inMinutosIntervalo.value)
-
-
-
-
-/*Numero de ciclos */
-
-var inCiclos = document.getElementById("ciclos-set")
-var valorInCiclos = parseInt(inCiclos.value)
 
