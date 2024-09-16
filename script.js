@@ -1,3 +1,10 @@
+/*Circulo timer */
+var minutosCirculo = document.getElementById("minutos-circulo")
+var numeroCiclos = document.getElementById("numero-ciclos")
+
+var elementoPai = document.getElementById("elemento-pai");
+
+var textoTimer = document.getElementById("textoTimer")
 /**/
 var textoTempoRestante = document.getElementById("minutos-restantes")
 
@@ -22,13 +29,6 @@ var btnCampoComecar = document.getElementById("comecar")
 var btnAumentarFoco = document.getElementById("btnAumentarFoco")
 var btnDiminuirFoco = document.getElementById("btnDiminuirFoco")
 
-/*Circulo timer */
-var minutosCirculo = document.getElementById("minutos-circulo")
-var numeroCiclos = document.getElementById("numero-ciclos")
-
-var elementoPai = document.getElementById("elemento-pai");
-
-var textoTimer = document.getElementById("textoTimer")
 
 /*Minutos intervalo */
 
@@ -348,6 +348,26 @@ function pause() {
       pause();
     }
   });
+
+  let circuloFundo = document.getElementById("circulo-fundo");
+  
+  
+  function retirar() {
+    let boxMinutos = document.getElementById("box-minutos")
+    boxMinutos.outerHTML = '<div class="playpause" id="botao-pause"><input type="checkbox" value="None" id="playpause" name="check" /><label for="playpause" tabindex=1></label></div>'
+  }
+
+  function adicionar() {
+    let botaoPause = document.getElementById("botao-pause")
+    botaoPause.outerHTML = '<div id="box-minutos"><p id="minutos-circulo"></p><p id="minutos-restantes"></p></div>'
+    let boxMinutos = document.getElementById("box-minutos")
+    boxMinutos.children[0].textContent = inMinutosFoco.value;
+    boxMinutos.children[1].textContent = "minutos restantes"
+  }
+
+
+  circuloFundo.addEventListener("mouseover",retirar)
+  circuloFundo.addEventListener("mouseout",adicionar)
 
   
   
