@@ -113,99 +113,139 @@ var avisoIntervaloLongo = false;
 let contador = 0;
 let tempoRestante; // Variável global para manter o tempo restante
 let minutosCirculo; // Variável global para o elemento de minutos
+let timerAtivo;
+
+var circuloProgresso = document.getElementById('circulo-progresso');
+var textoTempoRestante = document.getElementById('minutos-restantes');
+var timerPausado = false; 
+var interval; 
+var emFoco = true;
+var contadorCiclos = 1;
+var circuloFundo = document.getElementById("circulo-fundo");
+var boxMinutos = document.getElementById("box-minutos");
+var timerSuperior = document.getElementById("timer-superior")
+
+function retirar() {
+    boxMinutos.innerHTML = '<div class="playpause" id="botao-pause"><input type="checkbox" value="None" id="playpause" name="check" /><label for="playpause" tabindex=1></label></div>';
+}
+
+function adicionar() {
+    boxMinutos.innerHTML = `<p id="minutos-circulo">${Math.floor(tempoRestante / 60)}</p><p id="minutos-restantes"></p>`;
+}
+
+function removerEventListeners() {
+    if (circuloFundo.hasListener) {
+        circuloFundo.removeEventListener("mouseover", retirar);
+        circuloFundo.removeEventListener("mouseleave", adicionar);
+        circuloFundo.hasListener = false; // Marcar que o listener foi removido
+    }
+}
+
+function adicionarEventListeners() {
+    if (!circuloFundo.hasListener) {
+        circuloFundo.addEventListener("mouseover", retirar);
+        circuloFundo.addEventListener("mouseleave", adicionar);
+        circuloFundo.hasListener = true; // Marcar que o listener foi adicionado
+    }
+}
 
 function timer(minutosTimer, cor) {
-  contador++;
-  if (avisoIntervaloLongo) {
-    minutosTimer = minutosTimer * 4;
-  }
-  if (!timerPausado && contador <= minutosTimer * 60) {
-    let circuloFundo = document.getElementById("circulo-fundo");
-    circuloFundo.addEventListener("mouseover", retirar);
-    circuloFundo.addEventListener("mouseleave", adicionar);
-
-    function retirar() {
-      let boxMinutos = document.getElementById("box-minutos");
-      boxMinutos.innerHTML = '<div class="playpause" id="botao-pause"><input type="checkbox" value="None" id="playpause" name="check" /><label for="playpause" tabindex=1></label></div>';
+    timerAtivo = true;
+    contador++;
+    if (avisoIntervaloLongo) {
+        minutosTimer = minutosTimer * 4;
     }
-
-    function adicionar() {
-      let boxMinutos = document.getElementById("box-minutos");
-      boxMinutos.innerHTML = `<p id="minutos-circulo">${Math.floor(tempoRestante / 60)}</p><p id="minutos-restantes"></p>`;
-    }
-
     var segundosTimer = minutosTimer * 60;
     tempoRestante = segundosTimer - contador;
     var minutosFoco = tempoRestante / 60;
     minutosCirculo = document.getElementById("minutos-circulo");
     textoTempoRestante = document.getElementById("minutos-restantes");
-    if(minutosCirculo == null) {
-      return
+
+    if (minutosCirculo == null) {
+        return;
     }
-    if (tempoRestante < 60) {
-      minutosCirculo.textContent = Math.floor(tempoRestante);
-      textoTempoRestante.textContent = 'segundos restantes';
+
+    removerEventListeners(); // Remover listeners no início
+
+    if (!timerPausado && contador <= segundosTimer) {
+        adicionarEventListeners(); // Adicionar listeners se o timer está rodando
+
+        if (tempoRestante < 60) {
+          if (tempoRestante < 10) {
+            timerSuperior.textContent = `00:0${tempoRestante}` 
+          } else {
+            timerSuperior.textContent = `00:${tempoRestante}`
+          }
+            minutosCirculo.textContent = Math.floor(tempoRestante);
+            textoTempoRestante.textContent = 'segundos restantes';
+        } else {
+          if(tempoRestante < 0,1666666666666667) {
+            timerSuperior.textContent = `${minutosFoco}:0${tempoRestante % 60}`
+          } else {
+            timerSuperior.textContent = `${minutosFoco}:${tempoRestante}`
+          }
+            minutosCirculo.textContent = Math.floor(minutosFoco);
+            textoTempoRestante.textContent = 'minutos restantes';
+        }
+
+        var circuloTimer = (tempoRestante * 360) / segundosTimer;
+        circuloProgresso.style.background = `conic-gradient(${cor} ${circuloTimer}deg, #1E1F25 0deg)`;
+
     } else {
-      minutosCirculo.textContent = Math.floor(minutosFoco);
-      textoTempoRestante.textContent = 'minutos restantes';
-    }
+        if (emFoco) {
+            if (contadorCiclos == inCiclos.value) {
+                circuloProgresso.style.background = `conic-gradient(${corIntervalo} 360deg, #1E1F25 0deg)`;
+                btnComecar.textContent = "Começar intervalo";
+                textoTimer.innerHTML = "Intervalo longo";
+                avisoIntervaloLongo = true;
+                btnCampoComecar.setAttribute("id", "intervaloSet");
+            } else {
+                btnCampoComecar.setAttribute("id", "intervaloSet");
+                emIntervalo = true;
+                emFoco = false;
+                btnComecar.textContent = "Começar";
+                circuloProgresso.style.background = `conic-gradient(${corIntervalo} 360deg, #1E1F25 0deg)`;
+                textoTimer.innerHTML = "Intervalo curto";
+            }
+        } else if (emIntervalo) {
+            emIntervalo = false;
+            emFoco = true;
+            btnComecar.textContent = "Começar";
+            circuloProgresso.style.background = `conic-gradient(${corFoco} 360deg, #1E1F25 0deg)`;
+            textoTimer.innerHTML = "Foco";
+            btnCampoComecar.setAttribute("id", "comecar");
+            contadorCiclos++;
+        } else if (avisoIntervaloLongo) {
+            circuloProgresso.style.background = `conic-gradient(${corFoco} 360deg, #1E1F25 0deg)`;
+            contadorCiclos = 0;
+            avisoIntervaloLongo = false;
+            emIntervalo = false;
+            emFoco = true;
+            btnComecar.textContent = "Começar";
+            textoTimer.innerHTML = "Foco";
+            btnCampoComecar.setAttribute("id", "comecar");
+            contadorCiclos++;
+        }
+        clearInterval(interval);
 
-    var circuloTimer = (tempoRestante * 360) / segundosTimer;
-    circuloProgresso.style.background = `conic-gradient(${cor} ${circuloTimer}deg, #1E1F25 0deg)`;
-
-  } else {
-    if (emFoco) {
-      if (contadorCiclos == inCiclos.value) {
-        circuloProgresso.style.background = `conic-gradient(${corIntervalo} 360deg, #1E1F25 0deg)`;
-        btnComecar.textContent = "Começar intervalo";
-        textoTimer.innerHTML = "Intervalo longo";
-        avisoIntervaloLongo = true;
-        btnCampoComecar.setAttribute("id", "intervaloSet");
-      } else {
-        btnCampoComecar.setAttribute("id", "intervaloSet");
-        emIntervalo = true;
-        emFoco = false;
-        btnComecar.textContent = "Começar";
-        circuloProgresso.style.background = `conic-gradient(${corIntervalo} 360deg, #1E1F25 0deg)`;
-        textoTimer.innerHTML = "Intervalo curto"
-      }
-    } else if (emIntervalo) {
-      emIntervalo = false;
-      emFoco = true;
-      btnComecar.textContent = "Começar";
-      circuloProgresso.style.background = `conic-gradient(${corFoco} 360deg, #1E1F25 0deg)`;
-      textoTimer.innerHTML = "Foco"
-      btnCampoComecar.setAttribute("id", "comecar");
-      contadorCiclos++
-    } else if (avisoIntervaloLongo) {
-      circuloProgresso.style.background = `conic-gradient(${corFoco} 360deg, #1E1F25 0deg)`;
-      contadorCiclos = 0;
-      avisoIntervaloLongo = false;
-      emIntervalo = false;
-      emFoco = true;
-      btnComecar.textContent = "Começar";
-      textoTimer.innerHTML = "Foco"
-      btnCampoComecar.setAttribute("id", "comecar");
-      contadorCiclos++
+        if (emFoco) {
+            if (inMinutosIntervalo.value < 1) {
+                minutosCirculo.textContent = inMinutosFoco.value * 60;
+            } else {
+                minutosCirculo.textContent = inMinutosFoco.value;
+            }
+        } else if (emIntervalo || avisoIntervaloLongo) {
+            if (inMinutosFoco.value < 1) {
+                minutosCirculo.textContent = inMinutosIntervalo.value * 60;
+            } else {
+                minutosCirculo.textContent = inMinutosIntervalo.value;
+            }
+        }
+        contador = 0;
+        configurarBotoes();
     }
-    clearInterval(interval);
-    if (emFoco) {
-      if (inMinutosIntervalo.value < 1) {
-        minutosCirculo.textContent = inMinutosFoco.value * 60;
-      } else {
-        minutosCirculo.textContent = inMinutosFoco.value
-      }
-    } else if (emIntervalo || avisoIntervaloLongo) {
-      if (inMinutosFoco.value < 1) {
-        minutosCirculo.textContent = inMinutosIntervalo.value * 60;
-      } else {
-        minutosCirculo.textContent = inMinutosIntervalo.value
-      }
-    }
-    contador = 0;
-    configurarBotoes();
-  }
 }
+
 
 
 
