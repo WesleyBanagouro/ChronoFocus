@@ -13,8 +13,8 @@ let boxMinutosCirculo = document.getElementById("minutos-circulo")
 window.addEventListener("load", function() {
   numeroCiclos.textContent = "Ciclos: 1/" + inCiclos.value;
   boxMinutosCirculo.textContent = valorInMinutosFoco
-  console.log(boxMinutosCirculo)
   textoTempoRestante.innerHTML = 'minutos</br>restantes';
+  timerSuperior.textContent = `${valorInMinutosFoco}:00`
 })
 
 var inMinutosFoco = document.getElementById("foco-set")
@@ -153,7 +153,7 @@ function timer(minutosTimer, cor) {
     timerAtivo = true;
     contador++;
     if (avisoIntervaloLongo) {
-        minutosTimer = minutosTimer * 4;
+        minutosTimer = minutosTimer * inCiclos.value;
     }
     var segundosTimer = minutosTimer * 60;
     tempoRestante = segundosTimer - contador;
@@ -169,7 +169,6 @@ function timer(minutosTimer, cor) {
 
     if (!timerPausado && contador <= segundosTimer) {
         adicionarEventListeners(); // Adicionar listeners se o timer está rodando
-
         if (tempoRestante < 60) {
           if (tempoRestante < 10) {
             timerSuperior.textContent = `00:0${tempoRestante}` 
@@ -179,10 +178,21 @@ function timer(minutosTimer, cor) {
             minutosCirculo.textContent = Math.floor(tempoRestante);
             textoTempoRestante.textContent = 'segundos restantes';
         } else {
-          if(tempoRestante < 0,1666666666666667) {
-            timerSuperior.textContent = `${minutosFoco}:0${tempoRestante % 60}`
-          } else {
-            timerSuperior.textContent = `${minutosFoco}:${tempoRestante}`
+          if((tempoRestante % 60) > 10) {
+            if(minutosFoco < 10) {
+              timerSuperior.textContent = `0${Math.floor(minutosFoco)}:${tempoRestante % 60}`
+            } else {
+              console.log(tempoRestante % 60)
+              console.log("está maior")
+              timerSuperior.textContent = `${Math.floor(minutosFoco)}:${tempoRestante % 60}`
+            }
+            
+          } else if((tempoRestante % 60) < 10) {
+         
+            
+            console.log(tempoRestante % 60)
+            console.log("está menor")
+            timerSuperior.textContent = `0${Math.floor(minutosFoco)}:0${tempoRestante % 60}`
           }
             minutosCirculo.textContent = Math.floor(minutosFoco);
             textoTempoRestante.textContent = 'minutos restantes';
@@ -194,12 +204,36 @@ function timer(minutosTimer, cor) {
     } else {
         if (emFoco) {
             if (contadorCiclos == inCiclos.value) {
+              if(inMinutosIntervalo.value < 1){
+                console.log("segundos")
+                textoTempoRestante.textContent = 'segundos restantes';
+                timerSuperior.textContent = `00:${inMinutosIntervalo.value * inCiclos.value * 60}`
+              } else if(inMinutosIntervalo.value < 10) {
+                console.log("minutos menores que 10")
+                timerSuperior.textContent = `0${inMinutosIntervalo.value * inCiclos.value}:00`
+              } else {
+                console.log("minutos maiores que 10")
+                textoTempoRestante.textContent = 'minutos restantes';
+                timerSuperior.textContent = `${inMinutosIntervalo.value * inCiclos.value}:00`
+              }
+                //timerSuperior.textContent = `${inMinutosIntervalo.value}:00`
                 circuloProgresso.style.background = `conic-gradient(${corIntervalo} 360deg, #1E1F25 0deg)`;
                 btnComecar.textContent = "Começar intervalo";
                 textoTimer.innerHTML = "Intervalo longo";
                 avisoIntervaloLongo = true;
+                emFoco = false;
                 btnCampoComecar.setAttribute("id", "intervaloSet");
             } else {
+              if(inMinutosIntervalo.value < 1){
+                textoTempoRestante.textContent = 'segundos restantes';
+                timerSuperior.textContent = `00:${inMinutosIntervalo.value * 60}`
+              } else if(inMinutosIntervalo.value < 10) {
+                textoTempoRestante.textContent = 'minutos restantes';
+                timerSuperior.textContent = `0${inMinutosIntervalo.value}:00`
+              } else {
+                textoTempoRestante.textContent = 'minutos restantes';
+                timerSuperior.textContent = `${inMinutosIntervalo.value}:00`
+              }
                 btnCampoComecar.setAttribute("id", "intervaloSet");
                 emIntervalo = true;
                 emFoco = false;
@@ -208,6 +242,16 @@ function timer(minutosTimer, cor) {
                 textoTimer.innerHTML = "Intervalo curto";
             }
         } else if (emIntervalo) {
+          if(inMinutosIntervalo.value < 1){
+            textoTempoRestante.textContent = 'segundos restantes';
+            timerSuperior.textContent = `00:${inMinutosFoco.value * 60}`
+          } else if(inMinutosFoco.value < 10) {
+            textoTempoRestante.textContent = 'minutos restantes';
+            timerSuperior.textContent = `0${inMinutosFoco.value}:00`
+          } else {
+            textoTempoRestante.textContent = 'minutos restantes';
+            timerSuperior.textContent = `${inMinutosFoco.value}:00`
+          }
             emIntervalo = false;
             emFoco = true;
             btnComecar.textContent = "Começar";
@@ -216,6 +260,15 @@ function timer(minutosTimer, cor) {
             btnCampoComecar.setAttribute("id", "comecar");
             contadorCiclos++;
         } else if (avisoIntervaloLongo) {
+          if(inMinutosIntervalo.value < 1){
+            textoTempoRestante.textContent = 'segundos restantes';
+            timerSuperior.textContent = `00:${inMinutosFoco.value * 60}`
+          } else if(inMinutosFoco.value < 10) {
+            timerSuperior.textContent = `0${inMinutosFoco.value}:00`
+          } else {
+            textoTempoRestante.textContent = 'minutos restantes';
+            timerSuperior.textContent = `${inMinutosFoco.value}:00`
+          }
             circuloProgresso.style.background = `conic-gradient(${corFoco} 360deg, #1E1F25 0deg)`;
             contadorCiclos = 0;
             avisoIntervaloLongo = false;
@@ -229,17 +282,26 @@ function timer(minutosTimer, cor) {
         clearInterval(interval);
 
         if (emFoco) {
+          console.log("está no foco")
             if (inMinutosIntervalo.value < 1) {
                 minutosCirculo.textContent = inMinutosFoco.value * 60;
             } else {
                 minutosCirculo.textContent = inMinutosFoco.value;
             }
-        } else if (emIntervalo || avisoIntervaloLongo) {
+        } else if (emIntervalo) {
+          console.log("está no intervalo curto")
             if (inMinutosFoco.value < 1) {
                 minutosCirculo.textContent = inMinutosIntervalo.value * 60;
             } else {
                 minutosCirculo.textContent = inMinutosIntervalo.value;
             }
+        } else if(avisoIntervaloLongo) {
+          console.log("está no intervalo longo")
+          if (inMinutosFoco.value < 1) {
+            minutosCirculo.textContent = inMinutosIntervalo.value * 60 * inCiclos.value;
+          } else {
+            minutosCirculo.textContent = inMinutosIntervalo.value * inCiclos.value;
+          }
         }
         contador = 0;
         configurarBotoes();
@@ -265,7 +327,7 @@ function intervaloLongo() {
     btnComecar.textContent = "Pausar";
     btnCampoComecar.setAttribute("id", "active");
     interval = setInterval(function(){
-      timer(0.1, corIntervalo)
+      timer(inMinutosIntervalo.value, corIntervalo)
     }, 1000);
 }
 }
