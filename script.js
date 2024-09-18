@@ -124,30 +124,31 @@ var contadorCiclos = 1;
 var circuloFundo = document.getElementById("circulo-fundo");
 var boxMinutos = document.getElementById("box-minutos");
 var timerSuperior = document.getElementById("timer-superior")
+minutosCirculo = document.getElementById("minutos-circulo");
 
-function retirar() {
-    boxMinutos.innerHTML = '<div class="playpause" id="botao-pause"><input type="checkbox" value="None" id="playpause" name="check" /><label for="playpause" tabindex=1></label></div>';
+var botaoPause = false;
+
+function aparecer() {
+  circuloFundo.children[0].classList.remove('visible');
+  circuloFundo.children[0].classList.add('hidden');
+  circuloFundo.children[1].classList.add('visible');
+  circuloFundo.children[1].classList.remove('hidden');
 }
 
-function adicionar() {
-    boxMinutos.innerHTML = `<p id="minutos-circulo">${Math.floor(tempoRestante / 60)}</p><p id="minutos-restantes"></p>`;
+function desaparecer() {
+  circuloFundo.children[0].classList.add('visible');
+  circuloFundo.children[0].classList.remove('hidden');
+  circuloFundo.children[1].classList.remove('visible');
+  circuloFundo.children[1].classList.add('hidden');
 }
 
-function removerEventListeners() {
-    if (circuloFundo.hasListener) {
-        circuloFundo.removeEventListener("mouseover", retirar);
-        circuloFundo.removeEventListener("mouseleave", adicionar);
-        circuloFundo.hasListener = false; // Marcar que o listener foi removido
-    }
-}
+circuloFundo.addEventListener('mouseenter', aparecer)
+circuloFundo.addEventListener('mouseleave', desaparecer)
 
-function adicionarEventListeners() {
-    if (!circuloFundo.hasListener) {
-        circuloFundo.addEventListener("mouseover", retirar);
-        circuloFundo.addEventListener("mouseleave", adicionar);
-        circuloFundo.hasListener = true; // Marcar que o listener foi adicionado
-    }
-}
+
+
+
+
 
 function timer(minutosTimer, cor) {
     timerAtivo = true;
@@ -158,17 +159,13 @@ function timer(minutosTimer, cor) {
     var segundosTimer = minutosTimer * 60;
     tempoRestante = segundosTimer - contador;
     var minutosFoco = tempoRestante / 60;
-    minutosCirculo = document.getElementById("minutos-circulo");
     textoTempoRestante = document.getElementById("minutos-restantes");
 
     if (minutosCirculo == null) {
         return;
     }
 
-    removerEventListeners(); // Remover listeners no início
-
     if (!timerPausado && contador <= segundosTimer) {
-        adicionarEventListeners(); // Adicionar listeners se o timer está rodando
         if (tempoRestante < 60) {
           if (tempoRestante < 10) {
             timerSuperior.textContent = `00:0${tempoRestante}` 
@@ -182,16 +179,10 @@ function timer(minutosTimer, cor) {
             if(minutosFoco < 10) {
               timerSuperior.textContent = `0${Math.floor(minutosFoco)}:${tempoRestante % 60}`
             } else {
-              console.log(tempoRestante % 60)
-              console.log("está maior")
               timerSuperior.textContent = `${Math.floor(minutosFoco)}:${tempoRestante % 60}`
             }
             
           } else if((tempoRestante % 60) < 10) {
-         
-            
-            console.log(tempoRestante % 60)
-            console.log("está menor")
             timerSuperior.textContent = `0${Math.floor(minutosFoco)}:0${tempoRestante % 60}`
           }
             minutosCirculo.textContent = Math.floor(minutosFoco);
@@ -205,18 +196,14 @@ function timer(minutosTimer, cor) {
         if (emFoco) {
             if (contadorCiclos == inCiclos.value) {
               if(inMinutosIntervalo.value < 1){
-                console.log("segundos")
                 textoTempoRestante.textContent = 'segundos restantes';
                 timerSuperior.textContent = `00:${inMinutosIntervalo.value * inCiclos.value * 60}`
               } else if(inMinutosIntervalo.value < 10) {
-                console.log("minutos menores que 10")
                 timerSuperior.textContent = `0${inMinutosIntervalo.value * inCiclos.value}:00`
               } else {
-                console.log("minutos maiores que 10")
                 textoTempoRestante.textContent = 'minutos restantes';
                 timerSuperior.textContent = `${inMinutosIntervalo.value * inCiclos.value}:00`
               }
-                //timerSuperior.textContent = `${inMinutosIntervalo.value}:00`
                 circuloProgresso.style.background = `conic-gradient(${corIntervalo} 360deg, #1E1F25 0deg)`;
                 btnComecar.textContent = "Começar intervalo";
                 textoTimer.innerHTML = "Intervalo longo";
@@ -282,21 +269,18 @@ function timer(minutosTimer, cor) {
         clearInterval(interval);
 
         if (emFoco) {
-          console.log("está no foco")
             if (inMinutosIntervalo.value < 1) {
                 minutosCirculo.textContent = inMinutosFoco.value * 60;
             } else {
                 minutosCirculo.textContent = inMinutosFoco.value;
             }
         } else if (emIntervalo) {
-          console.log("está no intervalo curto")
             if (inMinutosFoco.value < 1) {
                 minutosCirculo.textContent = inMinutosIntervalo.value * 60;
             } else {
                 minutosCirculo.textContent = inMinutosIntervalo.value;
             }
         } else if(avisoIntervaloLongo) {
-          console.log("está no intervalo longo")
           if (inMinutosFoco.value < 1) {
             minutosCirculo.textContent = inMinutosIntervalo.value * 60 * inCiclos.value;
           } else {
@@ -353,7 +337,6 @@ function start() {
   configurarBotoes();
   if (inMinutosFoco.value == 0 || inMinutosIntervalo.value == 0 || inCiclos.value == 0) {
     validacaoPreenchimento()
-    console.log(inMinutosIntervalo.value)
     return
 }
   if (btnComecar.textContent === "Começar" || btnComecar.textContent === "Retomar foco") {
@@ -395,9 +378,6 @@ function novoTempo() {
 }
 
 function pause() {
-  console.log(avisoIntervaloLongo)
-  console.log(emFoco)
-  console.log(emIntervalo)
   elementoPai.removeEventListener("click", controleBotoes)
   timerPausado = true;
     clearInterval(interval);
