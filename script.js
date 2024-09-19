@@ -125,8 +125,12 @@ var circuloFundo = document.getElementById("circulo-fundo");
 var boxMinutos = document.getElementById("box-minutos");
 var timerSuperior = document.getElementById("timer-superior")
 minutosCirculo = document.getElementById("minutos-circulo");
+var pauseTimer = document.getElementById('botao-pause')
 
-var botaoPause = false;
+pauseTimer.addEventListener('click', () => {
+  console.log('pause')
+});
+
 
 function aparecer() {
   circuloFundo.children[0].classList.remove('visible');
