@@ -10,6 +10,13 @@ var textoTempoRestante = document.getElementById("minutos-restantes")
 
 let boxMinutosCirculo = document.getElementById("minutos-circulo")
 
+const endSound = document.getElementById('endSound');
+
+function playSound() {
+  endSound.play();
+}
+
+
 window.addEventListener("load", function() {
   numeroCiclos.textContent = "Ciclos: 1/" + inCiclos.value;
   boxMinutosCirculo.textContent = valorInMinutosFoco
@@ -227,7 +234,7 @@ function timer(minutosTimer, cor) {
                 timerSuperior.textContent = `${inMinutosIntervalo.value * inCiclos.value}:00`
               }
                 circuloProgresso.style.background = `conic-gradient(${corIntervalo} 360deg, #1E1F25 0deg)`;
-                btnComecar.textContent = "Começar intervalo";
+                btnComecar.textContent = "Começar";
                 textoTimer.innerHTML = "Intervalo longo";
                 avisoIntervaloLongo = true;
                 emFoco = false;
@@ -288,6 +295,7 @@ function timer(minutosTimer, cor) {
             btnCampoComecar.setAttribute("id", "comecar");
             contadorCiclos++;
         }
+        playSound()
         clearInterval(interval);
 
         if (emFoco) {
@@ -327,7 +335,7 @@ function intervaloLongo() {
   emIntervalo = false;
   avisoIntervaloLongo = true;
   configurarBotoes();
-  if (btnComecar.textContent === "Começar intervalo" || btnComecar.textContent === "Retomar intervalo") {
+  if (btnComecar.textContent === "Começar" || btnComecar.textContent === "Retomar") {
     timerPausado = false;
     avisoPreenchimento.style.color = "transparent";
     btnComecar.textContent = "Pausar";
@@ -379,7 +387,7 @@ function intervalo() {
   
   emIntervalo = true;
   configurarBotoes();
-  if (btnComecar.textContent === "Começar" || btnComecar.textContent === "Retomar intervalo") {
+  if (btnComecar.textContent === "Começar" || btnComecar.textContent === "Retomar") {
     timerPausado = false;
     btnComecar.textContent = "Pausar";
     btnCampoComecar.setAttribute("id", "active");
@@ -407,7 +415,7 @@ function pause() {
       btnComecar.textContent = "Retomar foco"
       btnCampoComecar.setAttribute("id", "comecar");
     } else if(emIntervalo || avisoIntervaloLongo){
-      btnComecar.textContent = "Retomar intervalo";
+      btnComecar.textContent = "Retomar";
       btnCampoComecar.setAttribute("id", "intervaloSet");
     }
     for (const button of allButtons) {
@@ -461,7 +469,7 @@ function pause() {
   
   
   btnCampoComecar.addEventListener("click", () => {
-    if (btnComecar.textContent === "Começar" || btnComecar.textContent === "Retomar foco" || btnComecar.textContent === "Retomar intervalo") {
+    if (btnComecar.textContent === "Começar" || btnComecar.textContent === "Retomar foco" || btnComecar.textContent === "Retomar") {
       if(emFoco) {
         start();
       } else if(emIntervalo) {
@@ -476,6 +484,7 @@ function pause() {
     }
   });
 
+  
 
 
   

@@ -26,42 +26,64 @@ button {
     user-select: none;
 }
 
+html {
+    height: 100%;
+}
+
 body {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif, Helvetica, sans-serif;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: space-between;
     background-color: #424451;
-    min-height: 100vh; 
     margin: 0;
     padding: 0;
     font-size: 0.8rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.conteudo {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    max-width: 50%;
 }
 
 header {
     display: flex;
     justify-content: center;
-    width: 54%;
+    width: 100%;
+    font-size: 1.2rem;
 }
 
 main {
     display: flex;
     justify-content: center;
-    width: 54%;
+    width: 100%;
 }
 
 footer {
     display: flex;
     justify-content: center;
-    width: 54%;
+    width: 100%;
+    font-size: 1.2rem;
+    color: white;
+    margin: 5px;
+}
+
+footer a{
+    text-decoration: underline;
+    text-decoration-color: #d2d2d2b7;
+    color: inherit;
 }
 
 .menu-topo {
     width: 100%;
     display: flex;
     justify-content: space-between;
-    border-bottom: 1px solid #d2d2d239;
     padding-bottom: 4px;
     padding-top: 10px;
 }
@@ -76,7 +98,6 @@ footer {
     padding: 3px 10px 3px 10px;
     cursor: pointer;
     border-radius: 4px;
-    background-color: #d2d2d239;
     margin: 5px;
     color: white;
 }
@@ -93,7 +114,7 @@ footer {
 }
 
 .card {
-    font-size: 1.4em;
+    font-size: 2em;
     font-family: Arial, Helvetica, sans-serif;
     border-radius: 1.4rem;
     background: #1E1F25;
@@ -102,8 +123,8 @@ footer {
     align-items: center;
     color: white;
     text-align: center;
-    width: 11.5rem;
-    height: 15.7rem;
+    width: 15rem;
+    height: 20rem;
     flex-direction: column;
     padding: 0.625rem 1.25rem 0.625rem 1.25rem;
 }
@@ -305,8 +326,8 @@ footer {
 }
 
 #circulo-status {
-    width: 11.25rem;
-    height: 11.25rem;
+    width: 15rem;
+    height: 15rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -317,8 +338,8 @@ footer {
 
 #circulo-progresso {
     background: conic-gradient(var(--corFoco) 360deg, #1E1F25 0deg);
-    width: 9rem;
-    height: 9rem;
+    width: 13rem;
+    height: 13rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -328,8 +349,8 @@ footer {
 
 #circulo-fundo {
     background-color: #1E1F25;
-    width: 8rem;
-    height: 8rem;
+    width: 12rem;
+    height: 12rem;
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -381,10 +402,10 @@ footer {
 }
 
 .botao-play{
-    width: 10rem;
+    width: 12rem;
     border-style: solid;
     box-sizing: border-box;
-    border-width: 2rem 2rem 2rem 4rem;
+    border-width: 4rem 4rem 4rem 6rem;
     border-color: transparent transparent transparent white;
     margin: 25%;
 }
@@ -395,12 +416,12 @@ footer {
 
 #minutos-circulo {
     margin: 0px;
-    font-size: 2.8em;
+    font-size: 3rem;
 }
 
 #minutos-restantes {
     margin: 0px;
-    font-size: 1rem;
+    font-size: 1.5rem;
 }
 
 #numero-ciclos {
