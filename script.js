@@ -99,7 +99,7 @@ function configurarBotoes() {
   }
 if (inMinutosFoco.value == 0 || inMinutosIntervalo.value == 0 || inCiclos.value == 0) {
     avisoPreenchimento.style.color = 'yellow';
-    avisoPreenchimento.style.fontSize = '0.6em'
+    avisoPreenchimento.style.fontSize = '0.7rem'
     for (const button of allButtons) {
         if (!excludedButtons.includes(button.id)) {
           button.removeAttribute('disabled');
@@ -348,7 +348,7 @@ function intervaloLongo() {
 
 function validacaoPreenchimento() {
   avisoPreenchimento.style.color = 'yellow';
-    avisoPreenchimento.style.fontSize = '0.6em'
+    avisoPreenchimento.style.fontSize = '0.7rem'
     for (const button of allButtons) {
         if (!excludedButtons.includes(button.id)) {
           button.removeAttribute('disabled');

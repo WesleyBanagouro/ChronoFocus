@@ -49,7 +49,7 @@ body {
     justify-content: space-between;
     align-items: center;
     height: 100%;
-    max-width: 50%;
+    width: 60%;
 }
 
 header {
@@ -72,6 +72,7 @@ footer {
     font-size: 1.2rem;
     color: white;
     margin: 5px;
+    text-align: center;
 }
 
 footer a{
@@ -95,11 +96,10 @@ footer a{
 
 
 .item-menu{
-    padding: 3px 10px 3px 10px;
     cursor: pointer;
     border-radius: 4px;
-    margin: 5px;
     color: white;
+    padding: 0.5rem;
 }
 
 .item-menu:hover{
@@ -109,12 +109,12 @@ footer a{
 
 .container {
     display: flex;
-    gap: 300px;
-    justify-content: space-around; 
+    justify-content: space-between;
+    width: 100%;
 }
 
 .card {
-    font-size: 2em;
+    font-size: 1.5rem;
     font-family: Arial, Helvetica, sans-serif;
     border-radius: 1.4rem;
     background: #1E1F25;
@@ -124,9 +124,50 @@ footer a{
     color: white;
     text-align: center;
     width: 15rem;
-    height: 20rem;
+    height: 18rem;
     flex-direction: column;
-    padding: 0.625rem 1.25rem 0.625rem 1.25rem;
+    padding: 0.5rem;
+}
+
+@media (max-width: 864px) {
+    footer {
+        font-size: 1rem;
+
+    }
+    .container {
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem
+    }
+
+    .card {
+        font-size: 1.2rem;
+        font-family: Arial, Helvetica, sans-serif;
+        border-radius: 1.4rem;
+        background: #1E1F25;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: white;
+        text-align: center;
+        width: 13rem;
+        height: 15rem;
+        flex-direction: column;
+        padding: 0.5rem;
+    }
+    
+    #minutos-circulo {
+        margin: 0px;
+        font-size: 2rem;
+    }
+
+    #minutos-restantes {
+        margin: 0px;
+        font-size: 0.7rem;
+    }
 }
 
 
@@ -138,21 +179,24 @@ footer a{
 #titulo {
     display: flex;
     justify-content: space-between;
-    width: 100%;
-    height: auto;
+    width: 80%;
+    height: 10%;
 }
 
 #aviso-preenchimento {
-    width: 50%;
+    width: 60%;
     color: transparent;
-    font-size: 0.6em;
+    padding-top: 5px;
 }
 
 #titulo p{
-    border-bottom: solid white;
-    height: 1.5em;
     margin: 0px;
 }
+
+.box {
+    width: 80%;
+}
+
 
 .set-menu {
     display: flex;
@@ -160,7 +204,8 @@ footer a{
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    margin: 0.31rem;
+    margin-bottom: 0.3rem;
+
 }
 
 .set-menu p{    
@@ -241,7 +286,7 @@ footer a{
     justify-content: center;
     background-color: var(--corFoco);
     border-radius: 0.625rem;
-    width: 11rem;
+    width: 80%;
     height: 2rem;
     cursor: pointer;
     border: solid transparent 0.1em;
@@ -307,7 +352,7 @@ footer a{
     justify-content: center;
     background-color: #FFe600;
     border-radius: 0.625rem;
-    width: 11rem;
+    width: 80%;
     height: 2rem;
     cursor: pointer;
     border: solid transparent 0.1em;
@@ -320,10 +365,7 @@ footer a{
 #reiniciar:active {
     background-color: #c5b100;
 }
-
-.titulo-foco {
-    margin-bottom: 1.25rem;
-}
+    
 
 #circulo-status {
     width: 15rem;
@@ -338,8 +380,8 @@ footer a{
 
 #circulo-progresso {
     background: conic-gradient(var(--corFoco) 360deg, #1E1F25 0deg);
-    width: 13rem;
-    height: 13rem;
+    width: 11rem;
+    height: 11rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -349,20 +391,13 @@ footer a{
 
 #circulo-fundo {
     background-color: #1E1F25;
-    width: 12rem;
-    height: 12rem;
+    width: 10rem;
+    height: 10rem;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-}
-
-#box-minutos {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
 }
 
 
@@ -372,6 +407,8 @@ footer a{
     height: 1px;
     font-size: 1px;
     transition: right 0.5s ease-out;
+    display: flex;
+    flex-direction: column;
 }
 
 .visible {
@@ -385,6 +422,20 @@ footer a{
     font-size: 15px;
     transition: right 0.5s ease-out;
 }
+
+.visible p{
+    align-items: center;
+    justify-content: space-around;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    visibility: visible;
+    width: 80%;
+    height: 80%;
+    font-size: 15px;
+    transition: right 0.5s ease-out;
+}
+
 
 .pause-logo {
     display: flex;
@@ -411,17 +462,24 @@ footer a{
 }
 
 #box-minutos p{
+    margin: 0;
     height: auto;
 }
 
 #minutos-circulo {
-    margin: 0px;
-    font-size: 3rem;
+    margin: 0;
+    font-size: 2.9rem;
+}
+
+.box-minutos-segundos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 #minutos-restantes {
-    margin: 0px;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
 }
 
 #numero-ciclos {
@@ -437,6 +495,7 @@ footer a{
     height: 400px;
     width: 200px;
 }
+
 
 
 .playpause {
