@@ -16,6 +16,6 @@ Bem-vindo ao ChronoFocus, um aplicativo Pomodoro elegante e eficiente projetado 
 ![Temporizador em Execução](foco-em-execucao.jpg)
 ![Pause no timer](pause-no-timer.jpg)
 
-## Site: ![site](path/to/screenshot2.png)
+- [Link para a Landing Page](https://wesleybanagouro.github.io/ChronoFocus/)
 
 
