@@ -159,7 +159,7 @@ footer a {
 
 #foco, #intervalo, #ciclos {
     border: solid;
-    width: 45%;
+    width: 30%;
 }
 
 #foco {
@@ -191,7 +191,7 @@ footer a {
     align-items: center;
     justify-content: center;
     border-radius: 0.625rem;
-    width: 80%;
+    width: 70%;
     height: 2rem;
     cursor: pointer;
     border: solid transparent 0.1em;
