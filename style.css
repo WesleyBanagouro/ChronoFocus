@@ -108,7 +108,7 @@ footer a {
     align-items: center;
     color: white;
     text-align: center;
-    width: 90%; 
+    width: 75%; 
     max-width: 20rem; 
     height: 18rem;
     padding: 0.5rem;
@@ -160,7 +160,9 @@ footer a {
 #foco, #intervalo, #ciclos {
     border: solid;
     width: 50%;
-
+    height: 1.8rem;
+    border-radius: 0.625rem;
+    border-width: 0.2rem;
 }
 
 
@@ -168,6 +170,7 @@ footer a {
 #foco, #foco button {
     border-color: var(--corFoco);
     color: var(--corFoco);
+    border-width: 0.2rem;
 }
 
 #intervalo, #intervalo button {
@@ -392,7 +395,7 @@ footer a {
 @media only screen and (min-width: 330px) and (max-width: 390px) {
     body {
         font-size: 0.6rem;
-        background-color: #a71c1c;
+        background-color: #FFe600;
         width: 100%;
 
     }
@@ -411,7 +414,6 @@ footer a {
 @media (min-width: 391px) and (max-width: 480px) {
     body {
         font-size: 0.7rem;
-        background-color: #FFe600;
     }
     
     #minutos-circulo {
@@ -422,7 +424,6 @@ footer a {
 @media (min-width: 481px) and (max-width: 600px) {
     body {
         font-size: 0.8rem;
-        background-color: #04C800;
     }
     
     #minutos-circulo {
@@ -433,7 +434,6 @@ footer a {
 @media (min-width: 601px) and (max-width: 767px) {
     body {
         font-size: 0.9rem;
-        background-color: blue;
     }
     
     #minutos-circulo {
@@ -444,7 +444,6 @@ footer a {
 @media (min-width: 768px) and (max-width: 1024px) {
     body {
         font-size: 1rem;
-        background-color: turquoise;
     }
     
     #minutos-circulo {
@@ -455,7 +454,6 @@ footer a {
 @media (min-width: 1025px) {
     body {
         font-size: 1.2rem;
-        background-color: springgreen;
     }
     
     #minutos-circulo {
