@@ -26,21 +26,17 @@ button {
     user-select: none;
 }
 
-html {
+html, body {
     height: 100%;
-}
-
-body {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif, Helvetica, sans-serif;
-    background-color: #424451;
     margin: 0;
     padding: 0;
-    font-size: 0.8rem;
-    height: 100%;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: #424451;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    font-size: 0.8rem;
 }
 
 .conteudo {
@@ -49,23 +45,11 @@ body {
     justify-content: space-between;
     align-items: center;
     height: 100%;
-    width: 60%;
+    width: 90%; /* Ajustado para ser mais responsivo */
+    max-width: 400px; /* Limite máximo de largura */
 }
 
-header {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    font-size: 1.2rem;
-}
-
-main {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-}
-
-footer {
+header, footer {
     display: flex;
     justify-content: center;
     width: 100%;
@@ -75,7 +59,7 @@ footer {
     text-align: center;
 }
 
-footer a{
+footer a {
     text-decoration: underline;
     text-decoration-color: #d2d2d2b7;
     color: inherit;
@@ -89,91 +73,50 @@ footer a{
     padding-top: 10px;
 }
 
-
-.menu-container{
+.menu-container {
     display: flex;
 }
 
-
-.item-menu{
+.item-menu {
     cursor: pointer;
     border-radius: 4px;
     color: white;
     padding: 0.5rem;
 }
 
-.item-menu:hover{
+.item-menu:hover {
     background-color: rgba(210, 210, 210, 0.573);
-    ;
 }
 
 .container {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: space-around;
     width: 100%;
+    align-items: center;
+    gap: 1.5rem;
 }
 
 .card {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     font-family: Arial, Helvetica, sans-serif;
     border-radius: 1.4rem;
     background: #1E1F25;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
     color: white;
     text-align: center;
-    width: 15rem;
-    height: 18rem;
-    flex-direction: column;
+    width: 90%; /* Ajustado para ser mais responsivo */
+    max-width: 20rem; /* Limite máximo de largura */
+    height: auto;
     padding: 0.5rem;
 }
 
-@media (max-width: 864px) {
-    footer {
-        font-size: 1rem;
-
-    }
-    .container {
-        display: flex;
-        justify-content: space-around;
-        width: 100%;
-        flex-direction: column;
-        align-items: center;
-        gap: 1.5rem
-    }
-
-    .card {
-        font-size: 1.2rem;
-        font-family: Arial, Helvetica, sans-serif;
-        border-radius: 1.4rem;
-        background: #1E1F25;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        color: white;
-        text-align: center;
-        width: 20rem;
-        height: 22rem;
-        flex-direction: column;
-        padding: 0.5rem;
-    }
-    
-    #minutos-circulo {
-        margin: 0px;
-        font-size: 2rem;
-    }
-
-    #minutos-restantes {
-        margin: 0px;
-        font-size: 0.7rem;
-    }
-}
-
-
-
 .box {
     margin: 0;
+    width: 100%;
 }
 
 #titulo {
@@ -189,14 +132,9 @@ footer a{
     padding-top: 5px;
 }
 
-#titulo p{
-    margin: 0px;
+#titulo p {
+    margin: 0;
 }
-
-.box {
-    width: 80%;
-}
-
 
 .set-menu {
     display: flex;
@@ -205,53 +143,36 @@ footer a{
     justify-content: space-between;
     width: 100%;
     margin-bottom: 0.3rem;
-
 }
 
-.set-menu p{    
+.set-menu p {    
     margin: 0;
 }
 
-#foco button {
-    color: var(--corFoco);
-}
-
-#intervalo button {
-    color: #04C800;
-}
-
-#ciclos button {
-    color: #898989;
-}
-
-.set-menu button {
+#set-menu button {
     color: white;
 }
 
-#reiniciar button{
-    color: black;
-}
-
-
-.set-menu div{
+#set-menu div {
     border-radius: 0.625rem;
 }
 
-#foco {
-    border: solid var(--corFoco);
+#foco, #intervalo, #ciclos {
+    border: solid;
     width: 45%;
+}
+
+#foco {
+    border-color: var(--corFoco);
 }
 
 #intervalo {
-    border: solid #04C800;
-    width: 45%;
+    border-color: #04C800;
 }
 
 #ciclos {
-    border: solid #898989;
-    width: 45%;
+    border-color: #898989;
 }
-
 
 #start-stop {
     display: flex;
@@ -259,55 +180,41 @@ footer a{
     justify-content: center;
     align-items: center;
     width: 100%;
-
 }
 
-#foco-set {
+#foco-set, #intervalo-set, #ciclos-set {
     text-align: center;
 }
 
-#intervalo-set {
-    text-align: center;
-}
-
-#ciclos-set {
-    text-align: center;
-}
-
-#comecar button{
-    color: white;
-}
-
-#start-stop p{
-    margin: 0.5rem;
-}
-
-
-#comecar {
+#comecar, #intervaloSet, #active, #reiniciar {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--corFoco);
     border-radius: 0.625rem;
     width: 80%;
     height: 2rem;
     cursor: pointer;
     border: solid transparent 0.1em;
+}
+
+#comecar {
+    background-color: var(--corFoco);
 }
 
 #intervaloSet {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     background-color: var(--corIntervalo);
-    border-radius: 0.625rem;
-    width: 80%;
-    height: 2rem;
-    cursor: pointer;
-    border: solid transparent 0.1em;
 }
 
-#comecar:hover {
+#active {
+    background-color: gray;
+}
+
+#reiniciar {
+    background-color: #FFe600;
+    color: #1E1F25;
+}
+
+#comecar:hover, #intervaloSet:hover, #active:hover, #reiniciar:hover {
     border-color: rgb(170, 170, 170);
 }
 
@@ -315,60 +222,17 @@ footer a{
     background-color: #a71c1c;
 }
 
-#intervaloSet:hover {
-    border-color: rgb(170, 170, 170);
-}
-
 #intervaloSet:active {
     background-color: #03c8006f;
-}
-
-#active:hover {
-    border-color: rgb(170, 170, 170);
-}
-
-#active {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: gray;
-    border-radius: 0.625rem;
-    width: 80%;
-    height: 2rem;
-    cursor: pointer;
-    border: solid transparent 0.1em;
-}
-
-#active button{
-    color: white;
 }
 
 #active:active {
     background-color: #404040;
 }
 
-
-#reiniciar {
-    color: #1E1F25;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #FFe600;
-    border-radius: 0.625rem;
-    width: 80%;
-    height: 2rem;
-    cursor: pointer;
-    border: solid transparent 0.1em;
-}
-
-#reiniciar:hover {
-    border-color:rgb(170, 170, 170);
-}
-
 #reiniciar:active {
     background-color: #c5b100;
 }
-    
 
 #circulo-status {
     width: 15rem;
@@ -378,8 +242,6 @@ footer a{
     align-items: center;
     margin: 0.3125rem;
 }
-
-
 
 #circulo-progresso {
     background: conic-gradient(var(--corFoco) 360deg, #1E1F25 0deg);
@@ -391,7 +253,6 @@ footer a{
     border-radius: 50%;
 }
 
-
 #circulo-fundo {
     background-color: #1E1F25;
     width: 10rem;
@@ -402,7 +263,6 @@ footer a{
     align-items: center;
     flex-direction: column;
 }
-
 
 .hidden {
     visibility: hidden;
@@ -426,11 +286,11 @@ footer a{
     transition: right 0.5s ease-out;
 }
 
-.visible p{
-    align-items: center;
-    justify-content: space-around;
+.visible p {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
     cursor: pointer;
     visibility: visible;
     width: 80%;
@@ -439,7 +299,6 @@ footer a{
     transition: right 0.5s ease-out;
 }
 
-
 .pause-logo {
     display: flex;
     background-color: white;
@@ -447,15 +306,15 @@ footer a{
     height: 80%;
 }
 
-.pause1{
+.pause1 {
     margin-left: 10px;
 }
 
-.pause2{
+.pause2 {
     margin-right: 10px;
 }
 
-.botao-play{
+.botao-play {
     width: 12rem;
     border-style: solid;
     box-sizing: border-box;
@@ -464,9 +323,8 @@ footer a{
     margin: 25%;
 }
 
-#box-minutos p{
+#box-minutos p {
     margin: 0;
-    height: auto;
 }
 
 #minutos-circulo {
@@ -493,39 +351,85 @@ footer a{
     width: auto;
 }
 
-#to-do {
-    background-color: blue;
-    height: 400px;
-    width: 200px;
+.playpause label {
+    display: block;
+    box-sizing: border-box;
+    width: 0;
+    height: 74px;
+    border-color: transparent transparent transparent #ffffff;
+    transition: 100ms all ease;
 }
 
+.playpause input[type="checkbox"] {
+    display: none;
+}
 
+.playpause input[type="checkbox"]:checked + label {
+    box-sizing: border-box;
+    width: 0;
+    height: 0;
+    border-width: 36px;
+    border-style: double;
+    border-color: #ffffff;
+    transition: 100ms all ease;
+}
 
-.playpause {
-    label {
-      display: block;
-      box-sizing: border-box;
-      width: 0;
-      height: 74px;
-  
-      border-color: transparent transparent transparent #ffffff;
-      transition: 100ms all ease;
-      cursor: pointer;
-      border-style: double;
-      border-width: 0px 0 0px 60px;
+@media only screen and (min-width: 330px) and (max-width: 390px) {
+    body {
+        font-size: 0.6rem;
     }
-    input[type="checkbox"] {
-      position: absolute;
-      left: -9999px;
-      &:checked + label {
-        border-style: solid;
-        border-width: 37px 0 37px 60px;
-      }
+    
+    #minutos-circulo {
+        font-size: 2rem;
     }
-  }
+}
 
-  
+@media (min-width: 391px) and (max-width: 480px) {
+    body {
+        font-size: 0.7rem;
+    }
+    
+    #minutos-circulo {
+        font-size: 2.2rem;
+    }
+}
 
+@media (min-width: 481px) and (max-width: 600px) {
+    body {
+        font-size: 0.8rem;
+    }
+    
+    #minutos-circulo {
+        font-size: 2.4rem;
+    }
+}
 
+@media (min-width: 601px) and (max-width: 767px) {
+    body {
+        font-size: 0.9rem;
+    }
+    
+    #minutos-circulo {
+        font-size: 2.6rem;
+    }
+}
 
-  
+@media (min-width: 768px) and (max-width: 1024px) {
+    body {
+        font-size: 1rem;
+    }
+    
+    #minutos-circulo {
+        font-size: 2.8rem;
+    }
+}
+
+@media (min-width: 1025px) {
+    body {
+        font-size: 1.2rem;
+    }
+    
+    #minutos-circulo {
+        font-size: 3rem;
+    }
+}
