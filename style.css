@@ -239,14 +239,17 @@ footer a{
 
 #foco {
     border: solid var(--corFoco);
+    width: 45%;
 }
 
 #intervalo {
     border: solid #04C800;
+    width: 45%;
 }
 
 #ciclos {
     border: solid #898989;
+    width: 45%;
 }
 
 
@@ -298,7 +301,7 @@ footer a{
     justify-content: center;
     background-color: var(--corIntervalo);
     border-radius: 0.625rem;
-    width: 11rem;
+    width: 80%;
     height: 2rem;
     cursor: pointer;
     border: solid transparent 0.1em;

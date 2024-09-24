@@ -226,7 +226,7 @@ function timer(minutosTimer, cor) {
             if (contadorCiclos == inCiclos.value) {
               if(inMinutosIntervalo.value < 1){
                 textoTempoRestante.innerHTML = 'segundos</br>restantes';
-                timerSuperior.textContent = `00:${inMinutosIntervalo.value * inCiclos.value * 60}`
+                timerSuperior.textContent = `00:0${inMinutosIntervalo.value * inCiclos.value * 60}`
               } else if(inMinutosIntervalo.value < 10) {
                 timerSuperior.textContent = `0${inMinutosIntervalo.value * inCiclos.value}:00`
               } else {
@@ -242,7 +242,7 @@ function timer(minutosTimer, cor) {
             } else {
               if(inMinutosIntervalo.value < 1){
                 textoTempoRestante.innerHTML = 'segundos</br>restantes';
-                timerSuperior.textContent = `00:${inMinutosIntervalo.value * 60}`
+                timerSuperior.textContent = `00:0${inMinutosIntervalo.value * 60}`
               } else if(inMinutosIntervalo.value < 10) {
                 textoTempoRestante.innerHTML = 'minutos</br>restantes';
                 timerSuperior.textContent = `0${inMinutosIntervalo.value}:00`
@@ -260,7 +260,7 @@ function timer(minutosTimer, cor) {
         } else if (emIntervalo) {
           if(inMinutosIntervalo.value < 1){
             textoTempoRestante.innerHTML = 'segundos</br>restantes';
-            timerSuperior.textContent = `00:${inMinutosFoco.value * 60}`
+            timerSuperior.textContent = `00:0${inMinutosFoco.value * 60}`
           } else if(inMinutosFoco.value < 10) {
             textoTempoRestante.innerHTML = 'minutos</br>restantes';
             timerSuperior.textContent = `0${inMinutosFoco.value}:00`
