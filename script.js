@@ -135,44 +135,81 @@ minutosCirculo = document.getElementById("minutos-circulo");
 var pauseTimer = document.getElementById('botao-pause');
 var pausarTimer = false;
 
-pauseTimer.addEventListener('click', () => {
-  if(!pausarTimer) {
-    pauseTimer.children[0].classList.remove('pause-logo');
-    pauseTimer.children[0].classList.remove('pause1');
-    pauseTimer.children[1].classList.remove('pause-logo');
-    pauseTimer.children[1].classList.remove('pause1');
+// Função para alternar os ícones
+function toggleIcons() {
+  if (!pausarTimer) {
+    pauseTimer.children[0].classList.remove('pause-logo', 'pause1');
+    pauseTimer.children[1].classList.remove('pause-logo', 'pause2');
     pauseTimer.children[0].classList.add('botao-play');
-    pausarTimer = true;
-    pause();
-  } else if(emFoco){
-    pauseTimer.children[0].classList.add('pause-logo');
-    pauseTimer.children[0].classList.add('pause1');
-    pauseTimer.children[1].classList.add('pause-logo');
-    pauseTimer.children[1].classList.add('pause1');
-    pauseTimer.children[0].classList.remove('botao-play');
-    pausarTimer = false;
-    start();
-  } else if(emIntervalo) {
-    pauseTimer.children[0].classList.add('pause-logo');
-    pauseTimer.children[0].classList.add('pause1');
-    pauseTimer.children[1].classList.add('pause-logo');
-    pauseTimer.children[1].classList.add('pause1');
-    pauseTimer.children[0].classList.remove('botao-play');
-    pausarTimer = false;
-    intervalo();
   } else {
-    pauseTimer.children[0].classList.add('pause-logo');
-    pauseTimer.children[0].classList.add('pause1');
-    pauseTimer.children[1].classList.add('pause-logo');
-    pauseTimer.children[1].classList.add('pause1');
+    pauseTimer.children[0].classList.add('pause-logo', 'pause1');
+    pauseTimer.children[1].classList.add('pause-logo', 'pause2');
     pauseTimer.children[0].classList.remove('botao-play');
-    pausarTimer = false;
-    intervaloLongo();
   }
-  
+}
+
+function toggleIconsMobile() {
+  if (!pausarTimer) {
+    circuloFundo.children[0].classList.remove('visible');
+    circuloFundo.children[0].classList.add('hidden');
+    circuloFundo.children[1].classList.add('visible');
+    circuloFundo.children[1].classList.remove('hidden');
+  } else {
+    circuloFundo.children[0].classList.add('visible');
+    circuloFundo.children[0].classList.remove('hidden');
+    circuloFundo.children[1].classList.remove('visible');
+    circuloFundo.children[1].classList.add('hidden');
+  }
+}
+
+// Função para lidar com a pausa e o início do timer
+function handleTimerToggleDesktop() {
+  toggleIcons();
+  pausarTimer = !pausarTimer;
+
+  if (pausarTimer) {
+    pause(); // Função para pausar o timer
+  } else {
+    if (emFoco) {
+      start(); // Função para iniciar o timer em foco
+    } else if (emIntervalo) {
+      intervalo(); // Função para iniciar o intervalo
+    } else {
+      intervaloLongo(); // Função para iniciar o intervalo longo
+    }
+  }
+}
+
+function handleTimerToggleMobile() {
+  toggleIconsMobile();
+  pausarTimer = !pausarTimer;
+
+  if (pausarTimer) {
+    pause(); // Função para pausar o timer
+  } else {
+    if (emFoco) {
+      start(); // Função para iniciar o timer em foco
+    } else if (emIntervalo) {
+      intervalo(); // Função para iniciar o intervalo
+    } else {
+      intervaloLongo(); // Função para iniciar o intervalo longo
+    }
+  }
+}
+
+
+
+// Adiciona o evento de clique
+pauseTimer.addEventListener('click', handleTimerToggleDesktop);
+
+// Adiciona o evento de toque
+circuloFundo.addEventListener('touchend', (event) => {
+  console.log('touch')
+  event.preventDefault(); 
+  handleTimerToggleMobile();
 });
 
-
+// Funções para aparecer e desaparecer
 function aparecer() {
   circuloFundo.children[0].classList.remove('visible');
   circuloFundo.children[0].classList.add('hidden');
@@ -187,10 +224,9 @@ function desaparecer() {
   circuloFundo.children[1].classList.add('hidden');
 }
 
-circuloFundo.addEventListener('mouseenter', aparecer)
-circuloFundo.addEventListener('mouseleave', desaparecer)
-
-
+// Eventos para aparecer e desaparecer
+circuloFundo.addEventListener('mouseenter', aparecer);
+circuloFundo.addEventListener('mouseleave', desaparecer);
 
 
 
