@@ -144,7 +144,7 @@ pauseTimer.addEventListener('click', () => {
     pauseTimer.children[0].classList.add('botao-play');
     pausarTimer = true;
     pause();
-  } else {
+  } else if(emFoco){
     pauseTimer.children[0].classList.add('pause-logo');
     pauseTimer.children[0].classList.add('pause1');
     pauseTimer.children[1].classList.add('pause-logo');
@@ -152,6 +152,22 @@ pauseTimer.addEventListener('click', () => {
     pauseTimer.children[0].classList.remove('botao-play');
     pausarTimer = false;
     start();
+  } else if(emIntervalo) {
+    pauseTimer.children[0].classList.add('pause-logo');
+    pauseTimer.children[0].classList.add('pause1');
+    pauseTimer.children[1].classList.add('pause-logo');
+    pauseTimer.children[1].classList.add('pause1');
+    pauseTimer.children[0].classList.remove('botao-play');
+    pausarTimer = false;
+    intervalo();
+  } else {
+    pauseTimer.children[0].classList.add('pause-logo');
+    pauseTimer.children[0].classList.add('pause1');
+    pauseTimer.children[1].classList.add('pause-logo');
+    pauseTimer.children[1].classList.add('pause1');
+    pauseTimer.children[0].classList.remove('botao-play');
+    pausarTimer = false;
+    intervaloLongo();
   }
   
 });
@@ -225,8 +241,13 @@ function timer(minutosTimer, cor) {
         if (emFoco) {
             if (contadorCiclos == inCiclos.value) {
               if(inMinutosIntervalo.value < 1){
-                textoTempoRestante.innerHTML = 'segundos</br>restantes';
+                if(inMinutosIntervalo.value * inCiclos.value * 60 < 10) {
+                  textoTempoRestante.innerHTML = 'segundos</br>restantes';
                 timerSuperior.textContent = `00:0${inMinutosIntervalo.value * inCiclos.value * 60}`
+                } else {
+                  textoTempoRestante.innerHTML = 'segundos</br>restantes';
+                  timerSuperior.textContent = `00:${inMinutosIntervalo.value * inCiclos.value * 60}`
+                }
               } else if(inMinutosIntervalo.value < 10) {
                 timerSuperior.textContent = `0${inMinutosIntervalo.value * inCiclos.value}:00`
               } else {
@@ -241,8 +262,13 @@ function timer(minutosTimer, cor) {
                 btnCampoComecar.setAttribute("id", "intervaloSet");
             } else {
               if(inMinutosIntervalo.value < 1){
-                textoTempoRestante.innerHTML = 'segundos</br>restantes';
-                timerSuperior.textContent = `00:0${inMinutosIntervalo.value * 60}`
+                if(inMinutosIntervalo.value * 60 < 10) {
+                  textoTempoRestante.innerHTML = 'segundos</br>restantes';
+                  timerSuperior.textContent = `00:0${inMinutosIntervalo.value * 60}`
+                }else {
+                  textoTempoRestante.innerHTML = 'segundos</br>restantes';
+                  timerSuperior.textContent = `00:${inMinutosIntervalo.value * 60}`
+                }
               } else if(inMinutosIntervalo.value < 10) {
                 textoTempoRestante.innerHTML = 'minutos</br>restantes';
                 timerSuperior.textContent = `0${inMinutosIntervalo.value}:00`
@@ -258,9 +284,14 @@ function timer(minutosTimer, cor) {
                 textoTimer.innerHTML = "Intervalo curto";
             }
         } else if (emIntervalo) {
-          if(inMinutosIntervalo.value < 1){
-            textoTempoRestante.innerHTML = 'segundos</br>restantes';
+          if(inMinutosFoco.value < 1){
+            if(inMinutosFoco.value * 60 < 10){
+              textoTempoRestante.innerHTML = 'segundos</br>restantes';
             timerSuperior.textContent = `00:0${inMinutosFoco.value * 60}`
+            } else {
+              textoTempoRestante.innerHTML = 'segundos</br>restantes';
+              timerSuperior.textContent = `00:${inMinutosFoco.value * 60}`
+            }
           } else if(inMinutosFoco.value < 10) {
             textoTempoRestante.innerHTML = 'minutos</br>restantes';
             timerSuperior.textContent = `0${inMinutosFoco.value}:00`
@@ -300,13 +331,13 @@ function timer(minutosTimer, cor) {
 
         if (emFoco) {
             if (inMinutosIntervalo.value < 1) {
-                minutosCirculo.textContent = inMinutosFoco.value * 60;
+                minutosCirculo.textContent = inMinutosFoco.value;
             } else {
                 minutosCirculo.textContent = inMinutosFoco.value;
             }
         } else if (emIntervalo) {
             if (inMinutosFoco.value < 1) {
-                minutosCirculo.textContent = inMinutosIntervalo.value * 60;
+                minutosCirculo.textContent = inMinutosIntervalo.value;
             } else {
                 minutosCirculo.textContent = inMinutosIntervalo.value;
             }

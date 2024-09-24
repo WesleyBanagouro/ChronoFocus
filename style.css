@@ -108,9 +108,9 @@ footer a {
     align-items: center;
     color: white;
     text-align: center;
-    width: 90%; /* Ajustado para ser mais responsivo */
-    max-width: 20rem; /* Limite máximo de largura */
-    height: auto;
+    width: 80%; 
+    max-width: 20rem; 
+    height: 18rem;
     padding: 0.5rem;
 }
 
@@ -159,19 +159,26 @@ footer a {
 
 #foco, #intervalo, #ciclos {
     border: solid;
-    width: 30%;
+    width: 50%;
+    border-radius: 0.625rem;
 }
 
-#foco {
+
+
+#foco, #foco button {
     border-color: var(--corFoco);
+    color: var(--corFoco);
 }
 
-#intervalo {
+#intervalo, #intervalo button {
     border-color: #04C800;
+    color: #04C800;
 }
 
-#ciclos {
+
+#ciclos, #ciclos button {
     border-color: #898989;
+    color: #898989;
 }
 
 #start-stop {
@@ -195,18 +202,26 @@ footer a {
     height: 2rem;
     cursor: pointer;
     border: solid transparent 0.1em;
+    margin: 0.5rem;
 }
 
-#comecar {
+#elemento-pai {
+    width: 70%;
+}
+
+#comecar, #comecar button {
     background-color: var(--corFoco);
+    color: white;
 }
 
-#intervaloSet {
+#intervaloSet, #intervaloSet button {
     background-color: var(--corIntervalo);
+    color: white;
 }
 
-#active {
+#active, #active button {
     background-color: gray;
+    color: white;
 }
 
 #reiniciar {
