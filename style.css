@@ -410,6 +410,7 @@ footer a {
 @media (min-width: 391px) and (max-width: 480px) {
     body {
         font-size: 0.7rem;
+        background-color: #FFe600;
     }
     
     #minutos-circulo {
@@ -420,6 +421,7 @@ footer a {
 @media (min-width: 481px) and (max-width: 600px) {
     body {
         font-size: 0.8rem;
+        background-color: #04C800;
     }
     
     #minutos-circulo {
@@ -430,6 +432,7 @@ footer a {
 @media (min-width: 601px) and (max-width: 767px) {
     body {
         font-size: 0.9rem;
+        background-color: blue;
     }
     
     #minutos-circulo {
@@ -440,6 +443,7 @@ footer a {
 @media (min-width: 768px) and (max-width: 1024px) {
     body {
         font-size: 1rem;
+        background-color: turquoise;
     }
     
     #minutos-circulo {
@@ -450,6 +454,7 @@ footer a {
 @media (min-width: 1025px) {
     body {
         font-size: 1.2rem;
+        background-color: springgreen;
     }
     
     #minutos-circulo {
