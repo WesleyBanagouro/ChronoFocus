@@ -17,6 +17,7 @@ Bem-vindo ao ChronoFocus, um aplicativo Pomodoro elegante e eficiente projetado 
 ![Tela Principal do ChronoFocus](iniciar-foco.jpg)
 ![Temporizador em Execução](foco-em-execucao.jpg)
 ![Pause no timer](pause-no-timer.jpg)
+![Intervalo em execução](intervalo-em-execucao.jpg)
 
 
 
