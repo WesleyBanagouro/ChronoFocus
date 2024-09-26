@@ -1,4 +1,58 @@
 /*Circulo timer */
+document.addEventListener('DOMContentLoaded', function() {
+  const cards = document.querySelectorAll('.card');
+  const dots = document.querySelectorAll('.dot');
+  const cardWrapper = document.querySelector('.card-wrapper');
+
+  let currentIndex = 0;
+
+  function updateIndicator() {
+      dots.forEach(dot => dot.classList.remove('active'));
+      dots[currentIndex].classList.add('active');
+  }
+
+  function goToCard(index) {
+      // Adiciona a classe hidden ao cartão atual
+      cards[currentIndex].classList.add('hidden');
+      
+      currentIndex = index;
+
+      // Remove a classe hidden do novo cartão
+      cards[currentIndex].classList.remove('hidden');
+
+      // Ajusta a posição para o cartão atual no centro
+  
+      
+      updateIndicator();
+  }
+
+  dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => goToCard(index));
+  });
+
+  let startX;
+
+  cardWrapper.addEventListener('touchstart', (event) => {
+      startX = event.touches[0].clientX;
+  });
+
+  cardWrapper.addEventListener('touchmove', (event) => {
+      const moveX = event.touches[0].clientX;
+      const diffX = startX - moveX;
+
+      if (diffX > 50 && currentIndex < cards.length - 1) {
+          goToCard(currentIndex + 1);
+      } else if (diffX < -50 && currentIndex > 0) {
+          goToCard(currentIndex - 1);
+      }
+  });
+
+  // Inicializa a visibilidade
+  cards[currentIndex].classList.remove('hidden');
+  updateIndicator();
+});
+
+
 
 var numeroCiclos = document.getElementById("numero-ciclos")
 
