@@ -464,22 +464,23 @@ footer a {
 }
 
 
-/* Adicione suas regras de estilo aqui */
 .hidden {
-    display: none;
+    display: none; /* Oculta cartões quando não estão ativos */
 }
 
 .card-wrapper {
-    display: flex;
-    transition: transform 0.3s ease; /* Para suavizar a transição */
+    display: flex; /* Mantém os cartões em linha */
+    transition: transform 0.5s ease; /* Suaviza a transição ao mudar de cartão */
     width: 100%; /* Largura total do contêiner */
+    overflow: hidden; /* Impede que cartões fora do wrapper sejam visíveis */
+    position: relative; /* Necessário para posicionar os cartões corretamente */
 }
 
 .card {
     min-width: 100%; /* Cada cartão ocupa 100% do espaço do contêiner */
     box-sizing: border-box; /* Inclui padding e border na largura total */
+    transition: transform 0.5s ease; /* Adiciona transição para a transformação */
 }
-
 
 .indicator {
     text-align: center;
@@ -497,7 +498,8 @@ footer a {
 }
 
 .dot.active {
-    background-color: #717171;
+    background-color: #717171; /* Cor para o indicador ativo */
 }
+
 
 
