@@ -1,4 +1,73 @@
-/*Circulo timer */
+document.addEventListener('DOMContentLoaded', function() {
+  const cards = document.querySelectorAll('.card');
+  const dots = document.querySelectorAll('.dot');
+  const cardWrapper = document.querySelector('.card-wrapper');
+
+  let currentIndex = 0;
+
+  function updateIndicator() {
+      dots.forEach(dot => dot.classList.remove('active'));
+      dots[currentIndex].classList.add('active');
+  }
+
+  function goToCard(index) {
+    // Verifica se o índice está dentro dos limites
+    if (index < 0 || index >= cards.length) return;
+
+    // Adiciona a classe 'hidden' ao cartão atual
+    cards[currentIndex].classList.add('hidden');
+
+    // Aplica a transformação de transição ao cartão atual
+    cards[currentIndex].style.transform = 'translateX(-100%)'; // Move para a esquerda
+
+    // Atualiza o índice
+    currentIndex = index;
+
+    // Remove a classe 'hidden' do novo cartão e aplica a transformação de entrada
+    cards[currentIndex].classList.remove('hidden');
+    cards[currentIndex].style.transform = 'translateX(0)'; // Move para a posição original
+
+    updateIndicator();
+}
+
+
+  dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => goToCard(index));
+  });
+
+  let startX;
+  let isMoving = false;
+
+  cardWrapper.addEventListener('touchstart', (event) => {
+      startX = event.touches[0].clientX;
+      isMoving = false; // Reinicia a flag de movimento
+  });
+
+  cardWrapper.addEventListener('touchmove', (event) => {
+      const moveX = event.touches[0].clientX;
+      const diffX = startX - moveX;
+
+      // Define um limite de 50px para a transição
+      if (Math.abs(diffX) > 50 && !isMoving) {
+          isMoving = true; // Marca que estamos em movimento
+          if (diffX > 0) {
+              // Deslizar para a esquerda
+              goToCard(currentIndex + 1);
+          } else {
+              // Deslizar para a direita
+              goToCard(currentIndex - 1);
+          }
+      }
+  });
+
+  // Inicializa a visibilidade
+  cards[currentIndex].classList.remove('hidden');
+  cards[currentIndex].style.transform = 'translateY(0)'; // Garante que o primeiro cartão esteja na posição correta
+  updateIndicator();
+});
+
+
+
 
 var numeroCiclos = document.getElementById("numero-ciclos")
 
