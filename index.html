@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
     <title>ChronoFocus &#127813;</title>
 </head>
 <body>
@@ -22,83 +23,92 @@
         </header>
         <main>
             <div class="container">
-                <div class="card">
-                    <div class="box" id="titulo">
-                        <p>Menu</p>
-                        <span id="aviso-preenchimento">
-                            * Preencha todos os campos abaixo
-                        </span>
-                    </div>
-                    <div class="box" id="elemento-pai">
-                        <div class="set-menu">
-                            <p>Foco</p>
-                            <div id="foco">
-                                <button class="menos">-</button>
-                                <input type="number" class="campo" id="foco-set" value="25">
-                                <button class="mais">+</button>
-                            </div>
+                <div class="swiper">
+                    <div class="swiper-wrapper">
+                        <!-- Slides -->
+                        <div class="swiper-slide">
+                          <div class="card">
+                              <div class="box" id="titulo">
+                                  <p>Menu</p>
+                                  <span id="aviso-preenchimento">
+                                      * Preencha todos os campos abaixo
+                                  </span>
+                              </div>
+                              <div class="box" id="elemento-pai">
+                                  <div class="set-menu">
+                                      <p>Foco</p>
+                                      <div id="foco">
+                                          <button class="menos">-</button>
+                                          <input type="number" class="campo" id="foco-set" value="25">
+                                          <button class="mais">+</button>
+                                      </div>
+                                  </div>
+                                  <div class="set-menu">
+                                      <p>Intervalo</p>
+                                      <div id="intervalo">
+                                          <button class="menos">-</button>
+                                          <input type="number" class="campo" id="intervalo-set" value="5">
+                                          <button class="mais">+</button>
+                                      </div>
+                                  </div>
+                                  <div class="set-menu">
+                                      <p>Ciclos</p>
+                                      <div id="ciclos">
+                                          <button class="menos">-</button>
+                                          <input type="number" class="campo" id="ciclos-set" value="4">
+                                          <button class="mais">+</button>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="box" id="start-stop">
+                                  <p id="comecar">
+                                      <button id="btnComecar">Começar</button>
+                                  </p>
+                                  <p id="reiniciar">
+                                      <button>Reiniciar</button>
+                                  </p>
+                              </div>
+                          </div>
                         </div>
-                        <div class="set-menu">
-                            <p>Intervalo</p>
-                            <div id="intervalo">
-                                <button class="menos">-</button>
-                                <input type="number" class="campo" id="intervalo-set" value="5">
-                                <button class="mais">+</button>
-                            </div>
+                        <div class="swiper-slide">
+                          <div class="card" id="clock">
+                              <div class="box titulo-foco" id="titulo">
+                                  <p id="textoTimer">Foco</p>
+                                  <div id="timer-superior">00:00</div>
+                              </div>
+                              <div class="box" id="circulo-status">
+                                  <div class='' id="circulo-progresso">
+                                      <div id="circulo-fundo">
+                                          <div id="box-minutos">
+                                              <div class="box-minutos-segundos">
+                                                  <p id="minutos-circulo">
+                                                      
+                                                  </p>
+                                                  <p id="minutos-restantes">
+                                                      
+                                                  </p>
+                                              </div>
+                                          </div>
+                                          <div class="hidden" id="botao-pause">
+                                              <div class="pause-logo pause1"></div>
+                                              <div class="pause-logo pause2"></div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="box" id="numero-ciclos">
+                                   
+                              </div>
+                          </div>
                         </div>
-                        <div class="set-menu">
-                            <p>Ciclos</p>
-                            <div id="ciclos">
-                                <button class="menos">-</button>
-                                <input type="number" class="campo" id="ciclos-set" value="4">
-                                <button class="mais">+</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="box" id="start-stop">
-                        <p id="comecar">
-                            <button id="btnComecar">Começar</button>
-                        </p>
-                        <p id="reiniciar">
-                            <button>Reiniciar</button>
-                        </p>
-                    </div>
-                </div>
-                <div class="card" id="clock">
-                    <div class="box titulo-foco" id="titulo">
-                        <p id="textoTimer">Foco</p>
-                        <div id="timer-superior">00:00</div>
-                    </div>
-                    <div class="box" id="circulo-status">
-                        <div class='' id="circulo-progresso">
-                            <div id="circulo-fundo">
-                                <div id="box-minutos">
-                                    <div class="box-minutos-segundos">
-                                        <p id="minutos-circulo">
-                                            
-                                        </p>
-                                        <p id="minutos-restantes">
-                                            
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="hidden" id="botao-pause">
-                                    <div class="pause-logo pause1"></div>
-                                    <div class="pause-logo pause2"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="box" id="numero-ciclos">
-                         
-                    </div>
+                      </div>
+                      <div class="swiper-pagination"></div>
                 </div>
                 <!-- e 
                  <div class="card" id="to-do">
                     <p>aqui é o menu</p>
                 </div>
-                -->
-                
+                -->   
             </div>
         </main>
         <footer>
@@ -108,5 +118,6 @@
     </div>
 
 </body>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="script.js"></script>
 </html>
