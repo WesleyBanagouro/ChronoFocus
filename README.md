@@ -3,7 +3,7 @@
 
 - [Link para o ChronoFocus](https://wesleybanagouro.github.io/ChronoFocus/)
 
-Bem-vindo ao ChronoFocus, um aplicativo Pomodoro elegante e eficiente projetado para ajudar você a aumentar a produtividade e gerenciar seu tempo de forma eficaz. Construído com HTML, CSS e JavaScript puros, o ChronoFocus oferece uma interface minimalista com todos os recursos essenciais que você precisa para implementar a Técnica Pomodoro em sua rotina diária.
+Um aplicativo Pomodoro elegante e eficiente projetado para ajudar você a aumentar a produtividade e gerenciar seu tempo de forma eficaz. Construído com HTML, CSS e JavaScript puros, o ChronoFocus oferece uma interface minimalista com todos os recursos essenciais que você precisa para implementar a Técnica Pomodoro em sua rotina diária.
 
 ## Funcionalidades
 
